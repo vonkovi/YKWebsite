@@ -1,6 +1,90 @@
 ---
 import PortfolioLayout from '../layouts/PortfolioLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const pinnedProject = allProjects.find(p => p.data.pinned);
+const featuredProjects = allProjects
+  .filter(p => p.data.featured && !p.data.pinned)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+const projectGridItems = [pinnedProject, ...featuredProjects].filter(Boolean);
+
+const allOrgs = await getCollection('orgs');
+const pinnedOrg = allOrgs.find(o => o.data.pinned);
+const featuredOrgs = allOrgs
+  .filter(o => o.data.featured && !o.data.pinned)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+const orgGridItems = [pinnedOrg, ...featuredOrgs].filter(Boolean);
 ---
-<PortfolioLayout title="Home">
-  <p>Hello</p>
+
+<PortfolioLayout title="Home" pageName="PORTFOLIO">
+
+  <!-- Ambitious Projects -->
+  <section class="px-4 md:px-8 py-12">
+    <p class="font-sans text-xs tracking-widest uppercase text-yk-dark/50 mb-6">
+      ambitious projects
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {projectGridItems.map((project, i) => (
+        <a
+          href={`/projects/${project.id}`}
+          class={`border border-yk-dark p-6 aspect-square flex flex-col justify-between transition-colors ${
+            i === 0
+              ? 'bg-yk-dark text-yk-white hover:bg-yk-dark/90'
+              : 'bg-yk-white text-yk-dark hover:bg-yk-beige'
+          }`}
+        >
+          <span class="font-sans text-xs tracking-widest uppercase opacity-60">
+            {project.data.type}
+          </span>
+          <div>
+            <h3 class="font-serif text-xl leading-snug">{project.data.title}</h3>
+            <p class="font-sans text-sm mt-1 opacity-70 line-clamp-2">{project.data.description}</p>
+          </div>
+        </a>
+      ))}
+      <a
+        href="/projects"
+        class="border border-yk-dark p-6 aspect-square flex items-end justify-end font-sans text-sm hover:bg-yk-dark hover:text-yk-white transition-colors"
+      >
+        more projects →
+      </a>
+    </div>
+  </section>
+
+  <!-- Founded Organizations -->
+  <section class="px-4 md:px-8 py-12">
+    <p class="font-sans text-xs tracking-widest uppercase text-yk-dark/50 mb-6">
+      founded organizations
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {orgGridItems.map((org, i) => (
+        <a
+          href={`/orgs/${org.id}`}
+          class={`border border-yk-dark p-6 aspect-square flex flex-col justify-between transition-colors ${
+            i === 0
+              ? 'bg-yk-dark text-yk-white hover:bg-yk-dark/90'
+              : 'bg-yk-white text-yk-dark hover:bg-yk-beige'
+          }`}
+        >
+          <span class="font-sans text-xs tracking-widest uppercase opacity-60">
+            organization
+          </span>
+          <div>
+            <h3 class="font-serif text-xl leading-snug">{org.data.title}</h3>
+            <p class="font-sans text-sm mt-1 opacity-70 line-clamp-2">{org.data.mission}</p>
+          </div>
+        </a>
+      ))}
+      <a
+        href="/orgs"
+        class="border border-yk-dark p-6 aspect-square flex items-end justify-end font-sans text-sm hover:bg-yk-dark hover:text-yk-white transition-colors"
+      >
+        more orgs →
+      </a>
+    </div>
+  </section>
+
 </PortfolioLayout>

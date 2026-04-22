@@ -12,9 +12,9 @@
 ## Phase 1 — Content Collections & Data Layer
 - [x] P1-1: Astro Content Collections configured (projects, orgs, blog) ← completed in Phase 0
 - [x] P1-2: Frontmatter schemas defined (Zod) ← completed in Phase 0
-- [ ] P1-3: setup.sh created (one-command project setup)
-- [ ] P1-4: Placeholder content added (3+ entries per collection)
-- [ ] P1-5: Content renders without errors (`npx astro check` + `npm run build`)
+- [x] P1-3: setup.sh created (one-command project setup)
+- [x] P1-4: Placeholder content added (3+ entries per collection)
+- [x] P1-5: Content renders without errors (`npx astro check` + `npm run build`)
 
 ## Phase 2 — Global Layout & Design System
 - [ ] P2-1: Global layout component (header, footer)

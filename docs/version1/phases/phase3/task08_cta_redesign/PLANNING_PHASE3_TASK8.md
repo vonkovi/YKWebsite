@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 8: CTA Redesign
 
-**Status: Pending.**
+**Status: Complete.**
 
 Covers issue #5 from UI review.
 
@@ -59,12 +59,12 @@ With the CTA moved out of the grid, the grid now holds exactly 6 project tiles (
 
 ## Checklist
 
-- [ ] "more projects →" removed from grid cells
-- [ ] "more projects →" placed as right-aligned link in `border-t` divider row below projects grid
-- [ ] "more orgs →" placed as right-aligned link in `border-t` divider row below orgs grid
-- [ ] CTA button style matches header nav button (`border border-yk-dark px-3 py-1`)
-- [ ] Divider row sits between projects section and orgs section heading
-- [ ] `npx astro check` passes
+- [x] "more projects →" removed from grid cells
+- [x] "more projects →" placed as right-aligned link in `border-t` divider row below projects grid
+- [x] "more orgs →" placed as right-aligned link in `border-t` divider row below orgs grid
+- [x] CTA button style matches header nav button (`border border-yk-dark px-3 py-1`)
+- [x] Divider row sits between projects section and orgs section heading
+- [x] `npx astro check` passes
 
 ## Outcome
 CTAs feel like navigation, not content. Clean divider between sections. Consistent button style with header.

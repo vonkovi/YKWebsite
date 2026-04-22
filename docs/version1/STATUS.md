@@ -14,12 +14,13 @@
 - [x] Phase 0 complete — scaffold committed
 - [x] Phase 1 complete — setup.sh + 9 placeholder MDX files + verified
 - [x] Phase 2 complete — update.sh, global layouts, full header, nav zones, Tailwind tokens, border system, North Star footer
-- [x] Phase 3 complete — MDX integration, projects grid, orgs grid, responsive layout (13 pages built)
+- [x] Phase 3 complete — MDX integration, grids, responsive layout, UI pass (16 pages built)
 
 ## Deviation Log
 - DaisyUI v4 → v5: `npx astro add tailwind` installs Tailwind v4, not v3. DaisyUI v5 is the correct pairing. Config is CSS-based via `@plugin "daisyui"` in global.css. Logged in ADR-005.
 - `z` import: Astro 5/6 deprecates `z` from `astro:content`. Now imported directly from `zod`.
 - Astro version: researched 5.x, installed 6.1.8. No API impact.
+- DaisyUI dark theme bleed: DaisyUI v5 was injecting a dark background behind the `my-4` outer wrapper margin. Fixed by adding `data-theme="light"` to `<html>` in BaseLayout.astro.
 
 ## Next Actions
 1. Build `/projects` archive page — 3×4 grid, all projects ordered by date, pinned tile top-left

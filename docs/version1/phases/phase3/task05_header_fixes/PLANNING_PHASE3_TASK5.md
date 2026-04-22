@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 5: Header Fixes
 
-**Status: Pending.**
+**Status: Complete.**
 
 Covers issues #1 and #7 from UI review.
 
@@ -59,10 +59,10 @@ This forces DaisyUI to use the light theme and prevents any dark background blee
 
 ## Checklist
 
-- [ ] Header left side refactored — branding and icons in explicit left group with `gap-8`
-- [ ] Header right side — pageName + nav button grouped on right
-- [ ] Black top bar eliminated (`data-theme="light"` on `<html>` or body bg confirmed)
-- [ ] `npx astro check` passes
+- [x] Header left side refactored — branding and icons in explicit left group with `gap-8`
+- [x] Header right side — pageName + nav button grouped on right with `gap-4`
+- [x] Black top bar eliminated — `data-theme="light"` added to `<html>` in BaseLayout.astro
+- [x] `npx astro check` passes
 
 ## Outcome
 Header spacing feels deliberate. No mystery black bar at top of page.

@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 7: Hover Effects
 
-**Status: Pending.**
+**Status: Complete.**
 
 Covers issue #4 from UI review.
 
@@ -87,15 +87,15 @@ Tailwind v4 supports arbitrary variants and `!` important modifier natively. `gr
 
 ## Checklist
 
-- [ ] `videoUrl` optional field added to projects schema in `content.config.ts`
-- [ ] `videoUrl` optional field added to orgs schema in `content.config.ts`
-- [ ] Grid container uses `group` class for sibling dimming
-- [ ] Non-hovered tiles dim to `opacity-40` when grid is hovered
-- [ ] Hovered tile stays at full opacity
-- [ ] Video autoplays on hover if `videoUrl` present
-- [ ] Hero image shown on hover if no `videoUrl`
-- [ ] Media layer is `absolute inset-0` behind text (`z-10` on text)
-- [ ] `npx astro check` passes
+- [x] `videoUrl` optional field added to projects schema in `content.config.ts`
+- [x] `videoUrl` optional field added to orgs schema in `content.config.ts`
+- [x] Grid container uses named group `group/grid` for sibling dimming
+- [x] Non-hovered tiles dim to `opacity-40` via `group-hover/grid:opacity-40`
+- [x] Hovered tile stays at full opacity via `hover:!opacity-100`
+- [x] Video autoplays muted on tile hover if `videoUrl` present (`group-hover/tile:opacity-20`)
+- [x] Hero image shown on tile hover if no `videoUrl` (same opacity reveal)
+- [x] Media layer is `absolute inset-0 pointer-events-none` behind text (`z-10` on text)
+- [x] `npx astro check` passes
 
 ## Outcome
 Hovering a tile dims all others and reveals media — video or photo. Tactile and editorial.

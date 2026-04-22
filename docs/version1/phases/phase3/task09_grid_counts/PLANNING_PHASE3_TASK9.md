@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 9: Grid Counts
 
-**Status: Pending.**
+**Status: Complete.**
 
 Covers issue #6 from UI review.
 
@@ -67,11 +67,11 @@ Placeholder content.
 
 ## Checklist
 
-- [ ] 3 new placeholder project MDX files added (featured: true)
-- [ ] `org3.mdx` updated to `featured: true`
-- [ ] Orgs query sliced to `slice(0, 2)` for 3 total tiles
-- [ ] Landing page shows 6 project tiles and 3 org tiles
-- [ ] `npm run build` passes with all new routes generated
+- [x] 3 new placeholder project MDX files added (featured: true) — Embedded Systems Monitor, Distributed Task Queue, RF Signal Classifier
+- [x] `org3.mdx` updated to `featured: true`
+- [x] Orgs query sliced to `slice(0, 2)` for 3 total tiles
+- [x] Landing page shows 6 project tiles and 3 org tiles
+- [x] `npm run build` passes — 16 pages built
 
 ## Outcome
 Projects grid fills 2 full rows (6 tiles). Orgs grid fills 1 row (3 tiles). Layout matches wireframe intent.

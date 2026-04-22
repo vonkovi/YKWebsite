@@ -26,7 +26,7 @@ export default defineConfig({
 
 | File | Purpose |
 |------|---------|
-| `src/layouts/BaseLayout.astro` | HTML shell — fonts, global.css, meta tags |
+| `src/layouts/BaseLayout.astro` | HTML shell — fonts, global.css, meta tags. `<html data-theme="light">` forces DaisyUI light theme. |
 | `src/layouts/PortfolioLayout.astro` | Portfolio zone wrapper — border box, Header (zone=portfolio), Footer |
 | `src/layouts/BlogLayout.astro` | Blog zone wrapper — border box, Header (zone=blog), Footer |
 | `src/components/Header.astro` | Universal header — branding, 5 icons, pageName, zone nav button |
@@ -69,31 +69,43 @@ No standalone About or Contact page.
 ### Universal Header
 Every page shares the same header structure:
 ```
-YVONKIM  [GH] [LI] [EMAIL] [CV] [DISCORD]  [PAGE NAME]  [nav button →]
+[ YVONKIM  [GH] [LI] [EMAIL] [CV] [DISCORD] ]     [ PAGE NAME  nav button → ]
 ```
-- **GitHub** — external link
-- **LinkedIn** — external link
-- **Email** — copies `ykim336@ucr.edu` to clipboard on click
-- **CV** — downloads `public/resume.pdf`
-- **Discord** — external link
-- **[PAGE NAME]** — current section label (PORTFOLIO, BLOG, PROJECTS/ALL, etc.)
-- **[nav button]** — toggles between portfolio zone and blog zone
+Two flex groups separated by `justify-between`:
+- **Left group** (`gap-8`): YVONKIM branding + icon row (`gap-3`)
+- **Right group** (`gap-4`): PAGE NAME (`hidden md:inline`) + nav button
+
+Icons: GitHub, LinkedIn, Email (copies `ykim336@ucr.edu`), CV (downloads `/resume.pdf`), Discord.
+Nav button: "personal blog →" on portfolio zone, "← portfolio" on blog zone.
 
 ### Landing Page (`/`)
 1. Header (PAGE NAME: PORTFOLIO, nav: "personal blog →")
-2. **Ambitious Projects** — 2×3 grid. Top-left = pinned black tile (`bg-yk-dark text-yk-white`). Remaining 5 slots = `featured: true && !pinned`, sorted by date desc. 6th slot = "more projects →" CTA.
-3. **Founded Organizations** — same grid pattern. 6th slot = "more orgs →" CTA.
+2. **Ambitious Projects** — 2×3 grid (6 tiles). Top-left = pinned black tile. 5 remaining = `featured: true && !pinned`, sorted by date desc. Below grid: `border-t` divider row with right-aligned "more projects →" button.
+3. **Founded Organizations** — 1×3 grid (3 tiles). Same pattern. Below grid: "more orgs →" divider row.
 4. **North Star footer** — "To improve the quality of living for the average citizen by 2x."
 
 #### Grid Data Query Pattern
 ```ts
+// Projects: pinned + up to 5 featured = 6 tiles
 const pinned = items.find(i => i.data.pinned);
 const featured = items
   .filter(i => i.data.featured && !i.data.pinned)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 5);
+  .slice(0, 5);  // orgs uses slice(0, 2) for 3 total
 const gridItems = [pinned, ...featured].filter(Boolean);
 ```
+
+#### Grid Tile Behaviour
+- No type badge — title + description only
+- Tiles are `relative overflow-hidden aspect-square`
+- On hover: all sibling tiles dim to `opacity-40` (Tailwind named group `group/grid` + `group-hover/grid:opacity-40`)
+- Hovered tile stays at full opacity (`hover:!opacity-100`)
+- Media layer (`absolute inset-0`) fades in to `opacity-20` on tile hover (`group/tile` + `group-hover/tile:opacity-20`)
+- Video autoplays muted if `videoUrl` set; falls back to `heroImage`
+- Text sits above media on `relative z-10`
+
+#### CTA Buttons
+"more projects →" and "more orgs →" are **not** grid cells. Each sits in its own `border-t border-yk-dark` divider row, right-aligned, styled as `border border-yk-dark px-3 py-1` — same as header nav button.
 
 #### Grid Responsive Behaviour
 | Breakpoint | Columns |
@@ -102,9 +114,9 @@ const gridItems = [pinned, ...featured].filter(Boolean);
 | `640px–1023px` (tablet) | 2 |
 | `≥ 1024px` (desktop) | 3 |
 
-#### Responsive Adjustments (Phase 3)
-- Header `pageName` span: `hidden md:inline` — hidden on mobile to prevent overflow
-- Footer quote box inner padding: `p-6 md:p-10`
+#### Responsive Adjustments
+- Header `pageName`: `hidden md:inline` — hidden on mobile
+- Footer quote box padding: `p-6 md:p-10`
 - Section padding: `px-4 md:px-8`
 
 ### Projects Archive (`/projects`)
@@ -158,12 +170,13 @@ src/content/
 title: string
 description: string
 date: Date
-featured: boolean   // appears in landing 2×3 grid and /projects archive
+featured: boolean   // appears in landing grid and /projects archive
 pinned: boolean     // top-left black tile (only one should be true at a time)
 heroImage: string
 tags: string[]
 githubUrl?: string
 liveUrl?: string
+videoUrl?: string   // if set, autoplays on tile hover instead of heroImage
 type: 'github' | 'hardware' | 'fullstack'
 ```
 
@@ -172,11 +185,12 @@ type: 'github' | 'hardware' | 'fullstack'
 title: string
 description: string
 date: Date
-featured: boolean   // appears in landing 2×3 grid and /orgs archive
+featured: boolean   // appears in landing grid and /orgs archive
 pinned: boolean     // top-left black tile (only one should be true at a time)
 heroImage: string
 mission: string
 url?: string
+videoUrl?: string   // if set, autoplays on tile hover instead of heroImage
 ```
 
 ### Blog frontmatter

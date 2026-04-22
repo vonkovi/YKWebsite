@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 6: Tile Redesign
 
-**Status: Pending.**
+**Status: Complete.**
 
 Covers issues #2 and #3 from UI review.
 
@@ -50,10 +50,10 @@ Options:
 
 ## Checklist
 
-- [ ] Type badge (`fullstack`, `hardware`, `github`) removed from all project tiles
-- [ ] Tile layout adjusted — title + description without badge
-- [ ] Pinned black tile confirmed intentional (no code change needed)
-- [ ] `npx astro check` passes
+- [x] Type badge (`fullstack`, `hardware`, `github`) removed from all project tiles
+- [x] Tile layout adjusted — `flex-col justify-start gap-2`, title + description only
+- [x] Pinned black tile confirmed intentional (no code change needed)
+- [x] `npx astro check` passes
 
 ## Outcome
 Tiles are cleaner — no noisy type labels. Black pinned tile remains as editorial signature.

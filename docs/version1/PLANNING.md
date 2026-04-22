@@ -33,11 +33,11 @@
   - [x] P3-2a: Top-left high-contrast black tile
   - [x] P3-2b: "more orgs →" button (6th cell CTA → /orgs)
 - [x] P3-3: Responsive layout (grid-cols-1 sm:grid-cols-2 lg:grid-cols-3, mobile padding, hidden pageName)
-- [ ] P3-4: UI fixes — header spacing + black top bar
-- [ ] P3-5: Tile redesign — remove type badge, confirm pinned tile intent
-- [ ] P3-6: Hover effects — sibling dimming + video/image reveal on hover
-- [ ] P3-7: CTA redesign — move "more projects/orgs" to divider row, not grid cell
-- [ ] P3-8: Grid counts — 6 projects (2 rows), 3 orgs (1 row), add placeholders
+- [x] P3-4: UI fixes — header spacing (`gap-8` left group) + black top bar (`data-theme="light"`)
+- [x] P3-5: Tile redesign — type badge removed, pinned black tile confirmed intentional
+- [x] P3-6: Hover effects — sibling dimming via named Tailwind groups + image/video reveal
+- [x] P3-7: CTA redesign — "more projects/orgs →" moved to `border-t` divider row, matches nav button style
+- [x] P3-8: Grid counts — 6 projects (3 placeholders added), 3 orgs (org3 set to featured: true)
 
 ## Phase 4 — Projects & Orgs
 - [ ] P4-1: Projects archive (`/projects`) — 3×4 grid

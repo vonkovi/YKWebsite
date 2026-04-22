@@ -14,6 +14,7 @@ const projects = defineCollection({
     tags: z.array(z.string()),
     githubUrl: z.string().optional(),
     liveUrl: z.string().optional(),
+    videoUrl: z.string().optional(),
     type: z.enum(['github', 'hardware', 'fullstack']),
   }),
 });
@@ -29,6 +30,7 @@ const orgs = defineCollection({
     heroImage: z.string(),
     mission: z.string(),
     url: z.string().optional(),
+    videoUrl: z.string().optional(),
   }),
 });
 

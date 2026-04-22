@@ -15,7 +15,7 @@ const pinnedOrg = allOrgs.find(o => o.data.pinned);
 const featuredOrgs = allOrgs
   .filter(o => o.data.featured && !o.data.pinned)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 5);
+  .slice(0, 2);
 const orgGridItems = [pinnedOrg, ...featuredOrgs].filter(Boolean);
 ---
 
@@ -26,29 +26,37 @@ const orgGridItems = [pinnedOrg, ...featuredOrgs].filter(Boolean);
     <p class="font-sans text-xs tracking-widest uppercase text-yk-dark/50 mb-6">
       ambitious projects
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 group/grid">
       {projectGridItems.map((project, i) => (
         <a
           href={`/projects/${project.id}`}
-          class={`border border-yk-dark p-6 aspect-square flex flex-col justify-between transition-colors ${
+          class={`group/tile relative overflow-hidden border border-yk-dark p-6 aspect-square flex flex-col justify-start gap-2 transition-all duration-300 group-hover/grid:opacity-40 hover:!opacity-100 ${
             i === 0
-              ? 'bg-yk-dark text-yk-white hover:bg-yk-dark/90'
+              ? 'bg-yk-dark text-yk-white'
               : 'bg-yk-white text-yk-dark hover:bg-yk-beige'
           }`}
         >
-          <span class="font-sans text-xs tracking-widest uppercase opacity-60">
-            {project.data.type}
-          </span>
-          <div>
+          {project.data.videoUrl
+            ? <video
+                src={project.data.videoUrl}
+                class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/tile:opacity-20 transition-opacity duration-300 pointer-events-none"
+                autoplay loop muted playsinline
+              />
+            : <img
+                src={project.data.heroImage}
+                alt={project.data.title}
+                class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/tile:opacity-20 transition-opacity duration-300 pointer-events-none"
+              />
+          }
+          <div class="relative z-10 flex flex-col gap-2">
             <h3 class="font-serif text-xl leading-snug">{project.data.title}</h3>
-            <p class="font-sans text-sm mt-1 opacity-70 line-clamp-2">{project.data.description}</p>
+            <p class="font-sans text-sm opacity-70 line-clamp-2">{project.data.description}</p>
           </div>
         </a>
       ))}
-      <a
-        href="/projects"
-        class="border border-yk-dark p-6 aspect-square flex items-end justify-end font-sans text-sm hover:bg-yk-dark hover:text-yk-white transition-colors"
-      >
+    </div>
+    <div class="border-t border-yk-dark flex justify-end py-3">
+      <a href="/projects" class="font-sans text-sm border border-yk-dark px-3 py-1 hover:bg-yk-dark hover:text-yk-white transition-colors">
         more projects →
       </a>
     </div>
@@ -59,29 +67,37 @@ const orgGridItems = [pinnedOrg, ...featuredOrgs].filter(Boolean);
     <p class="font-sans text-xs tracking-widest uppercase text-yk-dark/50 mb-6">
       founded organizations
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 group/grid">
       {orgGridItems.map((org, i) => (
         <a
           href={`/orgs/${org.id}`}
-          class={`border border-yk-dark p-6 aspect-square flex flex-col justify-between transition-colors ${
+          class={`group/tile relative overflow-hidden border border-yk-dark p-6 aspect-square flex flex-col justify-start gap-2 transition-all duration-300 group-hover/grid:opacity-40 hover:!opacity-100 ${
             i === 0
-              ? 'bg-yk-dark text-yk-white hover:bg-yk-dark/90'
+              ? 'bg-yk-dark text-yk-white'
               : 'bg-yk-white text-yk-dark hover:bg-yk-beige'
           }`}
         >
-          <span class="font-sans text-xs tracking-widest uppercase opacity-60">
-            organization
-          </span>
-          <div>
+          {org.data.videoUrl
+            ? <video
+                src={org.data.videoUrl}
+                class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/tile:opacity-20 transition-opacity duration-300 pointer-events-none"
+                autoplay loop muted playsinline
+              />
+            : <img
+                src={org.data.heroImage}
+                alt={org.data.title}
+                class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover/tile:opacity-20 transition-opacity duration-300 pointer-events-none"
+              />
+          }
+          <div class="relative z-10 flex flex-col gap-2">
             <h3 class="font-serif text-xl leading-snug">{org.data.title}</h3>
-            <p class="font-sans text-sm mt-1 opacity-70 line-clamp-2">{org.data.mission}</p>
+            <p class="font-sans text-sm opacity-70 line-clamp-2">{org.data.mission}</p>
           </div>
         </a>
       ))}
-      <a
-        href="/orgs"
-        class="border border-yk-dark p-6 aspect-square flex items-end justify-end font-sans text-sm hover:bg-yk-dark hover:text-yk-white transition-colors"
-      >
+    </div>
+    <div class="border-t border-yk-dark flex justify-end py-3">
+      <a href="/orgs" class="font-sans text-sm border border-yk-dark px-3 py-1 hover:bg-yk-dark hover:text-yk-white transition-colors">
         more orgs →
       </a>
     </div>

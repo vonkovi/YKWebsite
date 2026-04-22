@@ -1,0 +1,14 @@
+---
+import PortfolioLayout from '../../layouts/PortfolioLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(p => ({ params: { slug: p.id }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+---
+<PortfolioLayout title={project.data.title} pageName={`PROJECTS/${project.id.toUpperCase()}`}>
+  <p>{project.data.title}</p>
+</PortfolioLayout>

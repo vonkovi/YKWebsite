@@ -17,12 +17,13 @@
 - [x] P1-5: Content renders without errors (`npx astro check` + `npm run build`)
 
 ## Phase 2 — Global Layout & Design System
-- [ ] P2-1: Global layout component (header, footer)
-- [ ] P2-2: "YVONKIM" header with social icons, email copy button, resume button
-- [ ] P2-3: "personal blog →" / "← portfolio" persistent nav
-- [ ] P2-4: Tailwind theme configured (colors, typography, spacing)
-- [ ] P2-5: Thin-line border system established
-- [ ] P2-6: North Star footer with mission statement
+- [ ] P2-1: update.sh created (one-command project refresh)
+- [ ] P2-2: Global layout component (header, footer shell)
+- [ ] P2-3: "YVONKIM" header — branding, 5 icons, page name, nav button
+- [ ] P2-4: "personal blog →" / "← portfolio" persistent nav zone switching
+- [ ] P2-5: Tailwind theme tokens (colors, typography, spacing)
+- [ ] P2-6: Thin-line border design system
+- [ ] P2-7: North Star footer with mission statement
 
 ## Phase 3 — Landing Page (`/`)
 - [ ] P3-1: Ambitious Projects 2×3 featured grid

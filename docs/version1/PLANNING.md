@@ -1,13 +1,13 @@
 ---
 # PLANNING
 
-## Phase 0 — Project Initialization
+## Phase 0 — Project Initialization ✓
 - [x] P0-1: Tech stack decided (Astro, TypeScript, Tailwind)
 - [x] P0-2: Docs initialized
-- [ ] P0-3: UI component library decided (shadcn/ui vs DaisyUI)
-- [ ] P0-4: Typography decided
-- [ ] P0-5: Astro project scaffolded
-- [ ] P0-6: Git initialized
+- [x] P0-3: UI component library decided (DaisyUI v5 — Tailwind v4 forced upgrade)
+- [x] P0-4: Typography decided (Playfair Display + DM Sans via fontsource)
+- [x] P0-5: Astro project scaffolded
+- [x] P0-6: Git initialized
 
 ## Phase 1 — Content Collections & Data Layer
 - [ ] P1-1: Astro Content Collections configured (projects, orgs, blog)

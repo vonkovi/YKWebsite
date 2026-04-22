@@ -33,13 +33,10 @@ Architectural Decision Log. Record the *why* behind key choices.
 
 ---
 
-## ADR-005: UI Component Library — PENDING
-**Decision:** TBD — shadcn/ui vs DaisyUI
-**Options:**
-- **shadcn/ui** — composable, unstyled base, best-in-class quality, requires Astro React integration (adds complexity)
-- **DaisyUI** — Tailwind plugin, zero JS overhead, simpler setup, less flexible
-**Resolve by:** End of Phase 0
-**Status:** Open
+## ADR-005: UI Component Library — DaisyUI v5
+**Decision:** DaisyUI v5 (not v4 as originally planned).
+**Reason:** `npx astro add tailwind` installs Tailwind v4, not v3. DaisyUI v4 requires Tailwind v3 — incompatible. DaisyUI v5 is the correct pairing for Tailwind v4. Config is CSS-based via `@plugin "daisyui"` in `global.css` instead of `tailwind.config.mjs`.
+**Status:** Locked
 
 ---
 

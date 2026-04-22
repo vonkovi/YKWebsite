@@ -26,7 +26,7 @@ public/               ← Static assets (resume PDF, images)
 
 ## Active Development
 
-Read `docs/STATUS.md` first when resuming work.
+Read `docs/version1/STATUS.md` first when resuming work.
 
 ### Key docs
 
@@ -37,17 +37,20 @@ Read `docs/STATUS.md` first when resuming work.
 | `docs/version1/ARCHITECTURE.md` | Site map, page anatomy, content schemas, design system |
 | `docs/version1/PLANNING.md` | Phase checklist |
 | `docs/version1/FUTURE_IMPLEMENTATIONS.md` | Explicitly deferred features — do not implement now |
-| `docs/version1/phases/phase0/task3/RESEARCH_PHASE0_TASK3.md` | Astro init research |
+| `docs/version1/phases/phase0/` | Phase 0 task folders — research + planning per task |
 
 ### Dev commands
 
+<!-- AUTO-GENERATED from package.json scripts -->
 ```bash
 npm install            # install dependencies
 npm run dev            # dev server (localhost:4321)
 npm run build          # production build
 npm run preview        # preview production build locally
-npx astro check        # type-check .astro files
+npm run astro          # direct Astro CLI access
+npx astro check        # type-check .astro and .ts files
 ```
+<!-- END AUTO-GENERATED -->
 
 ---
 

@@ -2,11 +2,12 @@
 # ARCHITECTURE
 
 ## Stack
-- **Framework:** Astro (static output)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **UI Components:** TBD — shadcn/ui (React integration) or DaisyUI (Tailwind plugin)
-- **Content:** Astro Content Collections (MDX)
+- **Framework:** Astro 6.x (static output)
+- **Language:** TypeScript 5.x (strict)
+- **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`)
+- **UI Components:** DaisyUI v5 (`@plugin "daisyui"` in global.css)
+- **Fonts:** fontsource-variable (Playfair Display + DM Sans — self-hosted)
+- **Content:** Astro Content Collections v2 (`src/content.config.ts` + `glob` loader)
 - **Deployment:** Vercel
 
 ---

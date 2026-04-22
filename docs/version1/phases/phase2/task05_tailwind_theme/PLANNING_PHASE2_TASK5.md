@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 2, Task 5: Tailwind Theme Tokens
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -50,9 +50,9 @@ Test by running `npm run build` — no errors means tokens resolved correctly.
 
 ## Checklist
 
-- [ ] `--color-yk-dark-muted` added to `@theme {}`
-- [ ] `--tracking-editorial` added to `@theme {}`
-- [ ] `npm run build` passes
+- [x] `--color-yk-dark-muted` added to `@theme {}`
+- [x] `--tracking-editorial` added to `@theme {}`
+- [x] `npm run build` passes
 
 ## Outcome
 Complete token set available for all Phase 2 components.

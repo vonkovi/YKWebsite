@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 2, Task 1: update.sh
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -59,10 +59,10 @@ Add `./update.sh` to dev commands section.
 
 ## Checklist
 
-- [ ] `update.sh` created at repo root
-- [ ] `chmod +x update.sh` run
-- [ ] Script runs cleanly end-to-end
-- [ ] CLAUDE.md dev commands updated
+- [x] `update.sh` created at repo root
+- [x] `chmod +x update.sh` run
+- [x] Script runs cleanly end-to-end
+- [x] CLAUDE.md dev commands updated
 
 ## Outcome
 One-command project refresh — pull, install, check, build.

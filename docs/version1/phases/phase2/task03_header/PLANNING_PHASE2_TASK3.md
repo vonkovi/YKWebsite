@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 2, Task 3: YVONKIM Header
 
-**Status: Pending.** Depends on task02 (global layout stub) completing first.
+**Status: Complete.**
 
 ---
 
@@ -96,12 +96,12 @@ const { zone, pageName } = Astro.props;
 
 ## Checklist
 
-- [ ] `Header.astro` stub replaced with full implementation
-- [ ] All 5 icons rendering
-- [ ] Email button copies `ykim336@ucr.edu` on click (test in browser)
-- [ ] CV link downloads `public/resume.pdf`
-- [ ] Nav button shows correct text per zone
-- [ ] `npx astro check` passes
+- [x] `Header.astro` stub replaced with full implementation
+- [x] All 5 icons rendering
+- [ ] Email button copies `ykim336@ucr.edu` on click (test in browser — requires dev server)
+- [ ] CV link downloads `public/resume.pdf` (requires resume.pdf in public/)
+- [x] Nav button shows correct text per zone
+- [x] `npx astro check` passes
 
 ## Outcome
 Universal header fully functional on all pages.

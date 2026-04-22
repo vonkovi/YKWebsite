@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 2, Task 4: Navigation Zone Switching
 
-**Status: Pending.** Handled as part of task03 (header) and task02 (layouts). This task covers wiring up the page files.
+**Status: Complete.**
 
 ---
 
@@ -117,14 +117,14 @@ const { post } = Astro.props;
 
 ## Checklist
 
-- [ ] `src/pages/projects/index.astro` created
-- [ ] `src/pages/projects/[slug].astro` created
-- [ ] `src/pages/orgs/index.astro` created
-- [ ] `src/pages/orgs/[slug].astro` created
-- [ ] `src/pages/blog/index.astro` created
-- [ ] `src/pages/blog/[slug].astro` created
-- [ ] `npm run build` passes (all routes generated)
-- [ ] Nav buttons switch correctly between zones
+- [x] `src/pages/projects/index.astro` created
+- [x] `src/pages/projects/[slug].astro` created
+- [x] `src/pages/orgs/index.astro` created
+- [x] `src/pages/orgs/[slug].astro` created
+- [x] `src/pages/blog/index.astro` created
+- [x] `src/pages/blog/[slug].astro` created
+- [x] `npm run build` passes (all routes generated)
+- [x] Nav buttons switch correctly between zones (wired via zone prop)
 
 ## Outcome
 All routes exist. Nav zones function correctly. Pages are stubs ready for Phase 3–5 content.

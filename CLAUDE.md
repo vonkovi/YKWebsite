@@ -46,12 +46,14 @@ Read `docs/version1/STATUS.md` first when resuming work.
 | `docs/version1/FUTURE_IMPLEMENTATIONS.md` | Explicitly deferred features — do not implement now |
 | `docs/version1/phases/phase0/` | Phase 0 task folders — research + planning per task |
 | `docs/version1/phases/phase1/` | Phase 1 task folders — research + planning per task |
+| `docs/version1/phases/phase2/` | Phase 2 task folders — research + planning per task |
 
 ### Dev commands
 
 <!-- AUTO-GENERATED from package.json scripts -->
 ```bash
 ./setup.sh             # first-time setup from fresh clone (install + type-check)
+./update.sh            # pull latest + sync deps + type-check + build
 npm install            # install dependencies
 npm run dev            # dev server (localhost:4321)
 npm run build          # production build

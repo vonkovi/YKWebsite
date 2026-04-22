@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 2, Task 2: Global Layout Component
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -114,12 +114,12 @@ import PortfolioLayout from '../layouts/PortfolioLayout.astro';
 
 ## Checklist
 
-- [ ] `PortfolioLayout.astro` created
-- [ ] `BlogLayout.astro` created
-- [ ] `Header.astro` stub created
-- [ ] `Footer.astro` stub created
-- [ ] `index.astro` updated to use PortfolioLayout
-- [ ] `npx astro check` passes
+- [x] `PortfolioLayout.astro` created
+- [x] `BlogLayout.astro` created
+- [x] `Header.astro` stub created (then immediately replaced with full implementation in task03)
+- [x] `Footer.astro` stub created (then immediately replaced with full implementation in task07)
+- [x] `index.astro` updated to use PortfolioLayout
+- [x] `npx astro check` passes
 
 ## Outcome
 Layout shell in place. Every page now has a consistent outer frame with header and footer slots.

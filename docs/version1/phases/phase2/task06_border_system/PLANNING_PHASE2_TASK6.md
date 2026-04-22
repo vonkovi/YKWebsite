@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 2, Task 6: Thin-Line Border System
 
-**Status: Pending.** Applied during task02, task03, and task07 — this task documents the system and verifies consistent application.
+**Status: Complete.**
 
 ---
 
@@ -46,12 +46,12 @@ After those tasks complete, verify every structural element uses the correct bor
 
 ## Checklist
 
-- [ ] Page outer wrapper has `border border-yk-dark mx-4 my-4`
-- [ ] Header has `border-b border-yk-dark`
-- [ ] Footer has `border-t border-yk-dark`
-- [ ] All icon buttons have `border border-yk-dark`
-- [ ] `.hatch` utility added to `global.css`
-- [ ] No box-shadows or rounded corners on structural elements
+- [x] Page outer wrapper has `border border-yk-dark mx-4 my-4` (PortfolioLayout + BlogLayout)
+- [x] Header has `border-b border-yk-dark`
+- [x] Footer has `border-t border-yk-dark`
+- [x] All icon buttons have `border border-yk-dark`
+- [x] `.hatch` utility added to `global.css` (`@layer utilities`)
+- [x] No box-shadows or rounded corners on structural elements
 
 ## Outcome
 Consistent editorial border language across the entire site.

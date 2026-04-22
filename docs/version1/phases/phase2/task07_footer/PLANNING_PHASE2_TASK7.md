@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 2, Task 7: North Star Footer
 
-**Status: Pending.** Depends on task02 (layout stub) completing first.
+**Status: Complete.**
 
 ---
 
@@ -38,12 +38,12 @@ Fill in `src/components/Footer.astro` with the full implementation.
 
 ## Checklist
 
-- [ ] Footer stub replaced with full implementation
-- [ ] "my north star..." label renders in small caps
-- [ ] Quote box renders with hatch background
-- [ ] Quote text in Playfair Display
-- [ ] Visually matches wireframe intent
-- [ ] `npx astro check` passes
+- [x] Footer stub replaced with full implementation
+- [x] "my north star..." label renders in small caps (tracking-widest uppercase text-xs)
+- [x] Quote box renders with hatch background (`.hatch` class applied)
+- [x] Quote text in Playfair Display (`font-serif`)
+- [x] Visually matches wireframe intent
+- [x] `npx astro check` passes
 
 ## Outcome
 North Star footer complete. Mission statement visible on every page.

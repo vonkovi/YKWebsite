@@ -10,6 +10,30 @@
 - **Content:** Astro Content Collections v2 (`src/content.config.ts` + `glob` loader)
 - **Deployment:** Vercel
 
+## Layout Components (Phase 2)
+
+| File | Purpose |
+|------|---------|
+| `src/layouts/BaseLayout.astro` | HTML shell — fonts, global.css, meta tags |
+| `src/layouts/PortfolioLayout.astro` | Portfolio zone wrapper — border box, Header (zone=portfolio), Footer |
+| `src/layouts/BlogLayout.astro` | Blog zone wrapper — border box, Header (zone=blog), Footer |
+| `src/components/Header.astro` | Universal header — branding, 5 icons, pageName, zone nav button |
+| `src/components/Footer.astro` | North Star footer — mission statement in Playfair + hatch box |
+
+### Tailwind Theme Tokens (`src/styles/global.css`)
+| Token | Value |
+|-------|-------|
+| `--font-sans` | DM Sans Variable |
+| `--font-serif` | Playfair Display Variable |
+| `--color-yk-dark` | `#2b2b2b` |
+| `--color-yk-beige` | `#f5f0e8` |
+| `--color-yk-white` | `#ffffff` |
+| `--color-yk-dark-muted` | `rgba(43,43,43,0.4)` |
+| `--tracking-editorial` | `0.15em` |
+
+### CSS Utilities
+- `.hatch` — diagonal repeating-linear-gradient for quote box background (in `@layer utilities`)
+
 ---
 
 ## Site Map

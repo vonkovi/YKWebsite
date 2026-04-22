@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mv task1 *)",
+      "Bash(mv task2 *)",
+      "Bash(mv task3 *)"
+    ]
+  }
+}

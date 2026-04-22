@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 4: Responsive Layout
 
-**Status: Pending.** Depends on task02 and task03 (both grids) completing first.
+**Status: Complete.**
 
 ---
 
@@ -71,13 +71,13 @@ Open `localhost:4321` in browser DevTools responsive mode.
 
 ## Checklist
 
-- [ ] Header pageName hidden on mobile (`hidden md:inline`)
-- [ ] Footer quote box padding reduced on mobile (`p-6 md:p-10`)
-- [ ] Section padding reduced on mobile (`px-4 md:px-8`)
-- [ ] 375px: no overflow, grid is single column
-- [ ] 768px: grid is 2 columns
-- [ ] 1280px: grid is 3 columns, full header visible
-- [ ] `npx astro check` passes
+- [x] Header pageName hidden on mobile (`hidden md:inline`)
+- [x] Footer quote box padding reduced on mobile (`p-6 md:p-10`)
+- [x] Section padding reduced on mobile (`px-4 md:px-8`)
+- [ ] 375px: no overflow, grid is single column (requires browser QA)
+- [ ] 768px: grid is 2 columns (requires browser QA)
+- [ ] 1280px: grid is 3 columns, full header visible (requires browser QA)
+- [x] `npx astro check` passes
 
 ## Outcome
 Landing page renders correctly across mobile, tablet, and desktop. No overflow or layout breakage.

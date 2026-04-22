@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 2: Projects Grid
 
-**Status: Pending.** Depends on task01 (MDX integration) completing first.
+**Status: Complete.**
 
 ---
 
@@ -78,12 +78,12 @@ const gridItems = [pinned, ...featured].filter(Boolean);
 
 ## Checklist
 
-- [ ] `getCollection('projects')` returns actual entries (task01 prerequisite)
-- [ ] Pinned tile renders in top-left with inverted colors
-- [ ] Up to 5 featured (non-pinned) tiles render in date order
-- [ ] "more projects →" CTA in final slot
-- [ ] "ambitious projects" label renders above grid
-- [ ] Grid is 3 columns on desktop
+- [x] `getCollection('projects')` returns actual entries (task01 prerequisite)
+- [x] Pinned tile renders in top-left with inverted colors
+- [x] Up to 5 featured (non-pinned) tiles render in date order
+- [x] "more projects →" CTA in final slot
+- [x] "ambitious projects" label renders above grid
+- [x] Grid is 3 columns on desktop
 
 ## Outcome
 Ambitious Projects 2×3 grid live on landing page. Pinned project in black tile. CTA links to archive.

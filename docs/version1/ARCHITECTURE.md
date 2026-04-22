@@ -7,8 +7,20 @@
 - **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`)
 - **UI Components:** DaisyUI v5 (`@plugin "daisyui"` in global.css)
 - **Fonts:** fontsource-variable (Playfair Display + DM Sans — self-hosted)
-- **Content:** Astro Content Collections v2 (`src/content.config.ts` + `glob` loader)
+- **Content:** Astro Content Collections v2 (`src/content.config.ts` + `glob` loader) + `@astrojs/mdx`
 - **Deployment:** Vercel
+
+### `astro.config.mjs`
+```js
+import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+import mdx from '@astrojs/mdx';
+
+export default defineConfig({
+  integrations: [mdx()],
+  vite: { plugins: [tailwindcss()] }
+});
+```
 
 ## Layout Components (Phase 2)
 
@@ -68,10 +80,32 @@ YVONKIM  [GH] [LI] [EMAIL] [CV] [DISCORD]  [PAGE NAME]  [nav button →]
 - **[nav button]** — toggles between portfolio zone and blog zone
 
 ### Landing Page (`/`)
-1. Header (PAGE NAME: PORTFOLIO, nav: "blog →")
-2. **Ambitious Projects** — 2×3 grid. Top-left = pinned black tile. "more projects →" bottom-right.
-3. **Founded Organizations** — 2×3 grid. Top-left = pinned black tile. "more orgs →" bottom-right.
-4. **North Star** — "To improve the quality of living for the average citizen by 2x."
+1. Header (PAGE NAME: PORTFOLIO, nav: "personal blog →")
+2. **Ambitious Projects** — 2×3 grid. Top-left = pinned black tile (`bg-yk-dark text-yk-white`). Remaining 5 slots = `featured: true && !pinned`, sorted by date desc. 6th slot = "more projects →" CTA.
+3. **Founded Organizations** — same grid pattern. 6th slot = "more orgs →" CTA.
+4. **North Star footer** — "To improve the quality of living for the average citizen by 2x."
+
+#### Grid Data Query Pattern
+```ts
+const pinned = items.find(i => i.data.pinned);
+const featured = items
+  .filter(i => i.data.featured && !i.data.pinned)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+const gridItems = [pinned, ...featured].filter(Boolean);
+```
+
+#### Grid Responsive Behaviour
+| Breakpoint | Columns |
+|------------|---------|
+| `< 640px` (mobile) | 1 |
+| `640px–1023px` (tablet) | 2 |
+| `≥ 1024px` (desktop) | 3 |
+
+#### Responsive Adjustments (Phase 3)
+- Header `pageName` span: `hidden md:inline` — hidden on mobile to prevent overflow
+- Footer quote box inner padding: `p-6 md:p-10`
+- Section padding: `px-4 md:px-8`
 
 ### Projects Archive (`/projects`)
 1. Header (PAGE NAME: PROJECTS/ALL, nav: "blog →")

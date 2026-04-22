@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 3: Organizations Grid
 
-**Status: Pending.** Depends on task02 (projects grid) completing first.
+**Status: Complete.**
 
 ---
 
@@ -77,12 +77,12 @@ const orgGridItems = [pinnedOrg, ...featuredOrgs].filter(Boolean);
 
 ## Checklist
 
-- [ ] `getCollection('orgs')` returns actual entries
-- [ ] Pinned org tile renders in top-left with inverted colors
-- [ ] Up to 5 featured (non-pinned) org tiles render in date order
-- [ ] "more orgs →" CTA in final slot
-- [ ] "founded organizations" label renders above grid
-- [ ] Both grids (projects + orgs) coexist on the page without visual conflict
+- [x] `getCollection('orgs')` returns actual entries
+- [x] Pinned org tile renders in top-left with inverted colors
+- [x] Up to 5 featured (non-pinned) org tiles render in date order
+- [x] "more orgs →" CTA in final slot
+- [x] "founded organizations" label renders above grid
+- [x] Both grids (projects + orgs) coexist on the page without visual conflict
 
 ## Outcome
 Founded Organizations 2×3 grid live below the Projects grid. Landing page now shows both content sections.

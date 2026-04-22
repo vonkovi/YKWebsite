@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 3, Task 1: MDX Integration
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -53,10 +53,10 @@ Expected output:
 
 ## Checklist
 
-- [ ] `npx astro add mdx` run
-- [ ] `astro.config.mjs` includes `mdx()` integration
-- [ ] `npm run build` produces no "No entry type found" warnings
-- [ ] Static slug routes are generated for all 9 MDX entries
+- [x] `npx astro add mdx` run
+- [x] `astro.config.mjs` includes `mdx()` integration
+- [x] `npm run build` produces no "No entry type found" warnings
+- [x] Static slug routes are generated for all 9 MDX entries (13 pages total)
 
 ## Outcome
 MDX integration live. Content collections fully operational. Slug pages generate real routes.

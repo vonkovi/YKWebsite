@@ -57,6 +57,7 @@ Read `docs/version1/STATUS.md` first when resuming work.
 | `docs/version1/phases/phase0/` | Phase 0 task folders — research + planning per task |
 | `docs/version1/phases/phase1/` | Phase 1 task folders — research + planning per task |
 | `docs/version1/phases/phase2/` | Phase 2 task folders — research + planning per task |
+| `docs/version1/phases/phase3/` | Phase 3 task folders — research + planning per task |
 
 ### Dev commands
 

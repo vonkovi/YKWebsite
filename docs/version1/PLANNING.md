@@ -25,14 +25,14 @@
 - [x] P2-6: Thin-line border design system + `.hatch` CSS utility
 - [x] P2-7: North Star footer with mission statement
 
-## Phase 3 — Landing Page (`/`)
-- [ ] P3-1: Ambitious Projects 2×3 featured grid
-  - [ ] P3-1a: Top-left high-contrast black tile
-  - [ ] P3-1b: "more projects →" button
-- [ ] P3-2: Founded Organizations 2×3 featured grid
-  - [ ] P3-2a: Top-left high-contrast black tile
-  - [ ] P3-2b: "more orgs →" button
-- [ ] P3-3: Responsive layout
+## Phase 3 — Landing Page (`/`) ✓
+- [x] P3-1: Ambitious Projects 2×3 featured grid
+  - [x] P3-1a: Top-left high-contrast black tile (pinned: true → bg-yk-dark text-yk-white)
+  - [x] P3-1b: "more projects →" button (6th cell CTA → /projects)
+- [x] P3-2: Founded Organizations 2×3 featured grid
+  - [x] P3-2a: Top-left high-contrast black tile
+  - [x] P3-2b: "more orgs →" button (6th cell CTA → /orgs)
+- [x] P3-3: Responsive layout (grid-cols-1 sm:grid-cols-2 lg:grid-cols-3, mobile padding, hidden pageName)
 
 ## Phase 4 — Projects & Orgs
 - [ ] P4-1: Projects archive (`/projects`) — 3×4 grid

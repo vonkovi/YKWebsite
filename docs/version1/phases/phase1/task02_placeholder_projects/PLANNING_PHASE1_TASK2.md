@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 1, Task 2: Placeholder Project Content
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -77,10 +77,10 @@ This site.
 
 ## Checklist
 
-- [ ] `sim42.mdx` created
-- [ ] `awebohack_hardware.mdx` created
-- [ ] `portfolio_site.mdx` created
-- [ ] Exactly one project has `pinned: true`
+- [x] `sim42.mdx` created
+- [x] `awebohack_hardware.mdx` created
+- [x] `portfolio_site.mdx` created
+- [x] Exactly one project has `pinned: true` (sim42)
 
 ## Outcome
 3 projects in content layer. Landing grid has a pinned hero tile and 2 featured tiles.

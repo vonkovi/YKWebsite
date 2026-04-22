@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 1, Task 4: Placeholder Blog Content
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -65,10 +65,10 @@ Thoughts on building in public.
 
 ## Checklist
 
-- [ ] `work_in_a_cubicle.mdx` created
-- [ ] `getting_started_with_astro.mdx` created
-- [ ] `building_in_public.mdx` created
-- [ ] All 3 categories covered: opinions, technical, startup
+- [x] `work_in_a_cubicle.mdx` created
+- [x] `getting_started_with_astro.mdx` created
+- [x] `building_in_public.mdx` created
+- [x] All 3 categories covered: opinions, technical, startup
 
 ## Outcome
 3 blog posts covering all categories. Blog index filter tabs will have content for each.

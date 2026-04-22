@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 1, Task 1: setup.sh
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -58,10 +58,10 @@ Add `./setup.sh` to dev commands section.
 
 ## Checklist
 
-- [ ] `setup.sh` created at repo root
-- [ ] `chmod +x setup.sh` run
-- [ ] Script runs cleanly end-to-end
-- [ ] CLAUDE.md dev commands updated
+- [x] `setup.sh` created at repo root
+- [x] `chmod +x setup.sh` run
+- [x] Script runs cleanly end-to-end
+- [x] CLAUDE.md dev commands updated
 
 ## Outcome
 One-command setup from fresh clone.

@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 1, Task 5: Verify Content
 
-**Status: Pending.** Runs last — after tasks 01–04 complete.
+**Status: Complete.**
 
 ---
 
@@ -35,11 +35,11 @@ Expected: all pages built successfully with no errors.
 
 ## Checklist
 
-- [ ] `npx astro check` passes (0 errors)
-- [ ] `npm run build` passes
-- [ ] `PLANNING.md` P1 tasks marked complete
-- [ ] `STATUS.md` updated to Phase 2
-- [ ] Git commit made
+- [x] `npx astro check` passes (0 errors, 0 warnings, 0 hints)
+- [x] `npm run build` passes (1 page built)
+- [x] `PLANNING.md` P1 tasks marked complete
+- [x] `STATUS.md` updated to Phase 2
+- [x] Git commit made (`feat: phase1 complete — setup.sh + placeholder content`)
 
 ## Outcome
 Phase 1 closed. All three content collections populated and verified. Ready for Phase 2.

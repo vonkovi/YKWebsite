@@ -14,12 +14,19 @@ YvonKim.com is a personal portfolio and blog for Yvon Kim — electrical enginee
 
 ```
 src/                  ← Astro source (active development)
-  content/            ← MDX content files (projects, orgs, blog)
-  components/         ← Reusable Astro/React components
-  layouts/            ← Page layout wrappers
+  content/
+    projects/         ← MDX — one file per project
+    orgs/             ← MDX — one file per org
+    blog/             ← MDX — one file per post
+  content.config.ts   ← Zod schemas for all three collections
+  components/         ← Reusable Astro components
+  layouts/            ← Page layout wrappers (BaseLayout.astro)
   pages/              ← File-based routing
-docs/                 ← Architecture, planning, and status docs
+  styles/
+    global.css        ← Tailwind v4 config (@theme, @plugin "daisyui")
+docs/                 ← Architecture, planning, and status docs (version1/)
 public/               ← Static assets (resume PDF, images)
+setup.sh              ← First-time setup script
 ```
 
 ---
@@ -38,11 +45,13 @@ Read `docs/version1/STATUS.md` first when resuming work.
 | `docs/version1/PLANNING.md` | Phase checklist |
 | `docs/version1/FUTURE_IMPLEMENTATIONS.md` | Explicitly deferred features — do not implement now |
 | `docs/version1/phases/phase0/` | Phase 0 task folders — research + planning per task |
+| `docs/version1/phases/phase1/` | Phase 1 task folders — research + planning per task |
 
 ### Dev commands
 
 <!-- AUTO-GENERATED from package.json scripts -->
 ```bash
+./setup.sh             # first-time setup from fresh clone (install + type-check)
 npm install            # install dependencies
 npm run dev            # dev server (localhost:4321)
 npm run build          # production build
@@ -91,7 +100,7 @@ The site intentionally splits into two experiences connected by a persistent nav
 - **Aesthetic:** Editorial × Paul Graham sparse minimalism × Japanese minimalism
 - **Layout:** Thin-line borders, generous whitespace
 - **Typography:** Playfair Display (headings) + DM Sans (body)
-- **UI Library:** TBD (ADR-005) — shadcn/ui or DaisyUI
+- **UI Library:** DaisyUI v5 (`@plugin "daisyui"` in global.css)
 
 ---
 

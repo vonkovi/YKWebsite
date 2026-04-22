@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 1, Task 3: Placeholder Org Content
 
-**Status: Pending.**
+**Status: Complete.**
 
 ---
 
@@ -72,10 +72,10 @@ Placeholder content.
 
 ## Checklist
 
-- [ ] `awebohack.mdx` created
-- [ ] `org2.mdx` created
-- [ ] `org3.mdx` created
-- [ ] Exactly one org has `pinned: true`
+- [x] `awebohack.mdx` created
+- [x] `org2.mdx` created
+- [x] `org3.mdx` created
+- [x] Exactly one org has `pinned: true` (awebohack)
 
 ## Outcome
 3 orgs in content layer. Landing grid has a pinned hero tile and 1 featured tile.

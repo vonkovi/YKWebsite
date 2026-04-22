@@ -12,88 +12,87 @@ This task covers the execution sequence — the exact commands run in order to p
 
 ---
 
-## Command Sequence
+## Command Sequence (Pre-Implementation Plan)
 
 ### Step 1: Scaffold
-
 ```bash
 npm create astro@latest . -- --template minimal --typescript strict --no-git
 ```
 
-- `.` = current directory (YKWebsite/)
-- `--template minimal` = empty project, no sample pages
-- `--typescript strict` = strict mode tsconfig
-- `--no-git` = we handle git in task06
-
 ### Step 2: Add Tailwind
-
 ```bash
 npx astro add tailwind
 ```
-
-Auto-installs `tailwindcss` + `@astrojs/tailwind`, creates `tailwind.config.mjs`, patches `astro.config.mjs`.
+Expected: installs `@astrojs/tailwind`, creates `tailwind.config.mjs`.
 
 ### Step 3: Install DaisyUI v4
-
 ```bash
 npm install -D daisyui@4
 ```
 
 ### Step 4: Install Fontsource
-
 ```bash
 npm install @fontsource-variable/playfair-display @fontsource-variable/dm-sans
 ```
 
 ### Step 5: Create Content Directories
-
 ```bash
 mkdir -p src/content/projects src/content/orgs src/content/blog
 mkdir -p src/components src/layouts
 ```
 
-### Step 6: Type-check
+---
 
-```bash
-npx astro check
-```
+## Deviation Log
 
-Should pass with zero errors on a fresh scaffold.
+### Scaffold into non-empty directory
+- **Expected:** `npm create astro@latest .` scaffolds into current directory
+- **Actual:** CLI refused — directory was not empty (had `CLAUDE.md`, `docs/`, `UI.png`). Scaffolded into `_temp/` subfolder then moved files up with `cp -r _temp/. . && rm -rf _temp`.
+
+### Tailwind version
+- **Expected:** `npx astro add tailwind` installs Tailwind v3, creates `tailwind.config.mjs`
+- **Actual:** Installed Tailwind **v4** (`@tailwindcss/vite` 4.2.4). No `tailwind.config.mjs` generated. Created `src/styles/global.css` with `@import "tailwindcss"`. Vite plugin added to `astro.config.mjs`.
+
+### DaisyUI version
+- **Expected:** `npm install -D daisyui@4`
+- **Actual:** `npm install daisyui` (v5.5.19) — Tailwind v4 requires DaisyUI v5. Loaded via `@plugin "daisyui"` in `global.css`.
+
+### `@astrojs/check` missing
+- **Expected:** `npx astro check` works immediately
+- **Actual:** Required separate install: `npm install @astrojs/check typescript`
 
 ---
 
-## Expected File Structure After Scaffold
+## Actual File Structure After Scaffold
 
 ```
 YKWebsite/
   src/
     content/
-      projects/
-      orgs/
-      blog/
-    content.config.ts    ← Astro 5 Content Collections config
-    components/
+      projects/       ← empty, ready for MDX
+      orgs/           ← empty, ready for MDX
+      blog/           ← empty, ready for MDX
+    content.config.ts ← Astro 6 Content Collections config
+    components/       ← empty
     layouts/
+      BaseLayout.astro
+    styles/
+      global.css      ← Tailwind v4 CSS config (no tailwind.config.mjs)
     pages/
       index.astro
   public/
-  astro.config.mjs
-  tailwind.config.mjs
+    favicon.ico
+    favicon.svg
+  astro.config.mjs    ← @tailwindcss/vite vite plugin (not @astrojs/tailwind)
   tsconfig.json
   package.json
+  package-lock.json
+  .gitignore
+  .vscode/
   CLAUDE.md
   docs/
   UI.png
 ```
-
----
-
-## Config Files to Edit After Scaffold
-
-1. **`tailwind.config.mjs`** — add DaisyUI plugin, font families, content glob
-2. **`astro.config.mjs`** — verify integrations (tailwind should be auto-added)
-3. **`src/content.config.ts`** — define all three collections with Zod schemas
-4. **`src/layouts/BaseLayout.astro`** — import fontsource fonts
 
 ---
 

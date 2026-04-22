@@ -1,7 +1,7 @@
 ---
 # PLANNING — Phase 0, Task 4: Typography & Fonts
 
-**Status: Pending.** Depends on task05 (scaffold) completing first.
+**Status: Complete.**
 
 ---
 
@@ -11,14 +11,18 @@
 npm install @fontsource-variable/playfair-display @fontsource-variable/dm-sans
 ```
 
+Installed: `@fontsource-variable/dm-sans@5.2.8`, `@fontsource-variable/playfair-display@5.2.8`
+
 ---
 
 ## Step 2: Create Base Layout (`src/layouts/BaseLayout.astro`)
 
+Actual implementation:
 ```astro
 ---
 import '@fontsource-variable/playfair-display';
 import '@fontsource-variable/dm-sans';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -35,64 +39,32 @@ const { title, description = 'YvonKim.com' } = Astro.props;
     <meta name="description" content={description} />
     <title>{title} — YVONKIM</title>
   </head>
-  <body class="font-sans bg-yk-white text-yk-dark">
+  <body>
     <slot />
   </body>
 </html>
 ```
 
----
-
-## Step 3: Create Global CSS (`src/styles/global.css`)
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  h1, h2, h3 {
-    font-family: 'Playfair Display Variable', serif;
-  }
-
-  body {
-    font-family: 'DM Sans Variable', sans-serif;
-  }
-}
-```
+> Note: `class="font-sans bg-yk-white text-yk-dark"` was moved to `@layer base` in `global.css` rather than inline on `<body>` — cleaner separation.
 
 ---
 
-## Step 4: Import Global CSS in Base Layout
+## Step 3: Global CSS (`src/styles/global.css`)
 
-Add to `BaseLayout.astro` head:
+**Planned:** `@tailwind base/components/utilities` (Tailwind v3 syntax).
+**Actual:** Tailwind v4 uses `@import "tailwindcss"`. Font and color tokens defined in `@theme {}`, applied in `@layer base`.
 
-```astro
-import '../styles/global.css';
-```
-
----
-
-## Step 5: Verify Fonts Render
-
-Run dev server and confirm Playfair Display loads on headings, DM Sans on body.
-
-```bash
-npm run dev
-```
+Actual file — see PLANNING_PHASE0_TASK3.md Step 1 for full content (global.css is shared between task03 and task04).
 
 ---
 
 ## Checklist
 
-- [ ] `@fontsource-variable/playfair-display` installed
-- [ ] `@fontsource-variable/dm-sans` installed
-- [ ] `src/layouts/BaseLayout.astro` created with font imports
-- [ ] `src/styles/global.css` created with base layer rules
-- [ ] Dev server confirms fonts rendering correctly
-
-## Depends On
-- task05_astro_scaffold complete
+- [x] `@fontsource-variable/playfair-display` installed (v5.2.8)
+- [x] `@fontsource-variable/dm-sans` installed (v5.2.8)
+- [x] `src/layouts/BaseLayout.astro` created with font imports
+- [x] Font tokens defined in `global.css` via `@theme {}`
+- [x] `@layer base` applies fonts to headings and body
 
 ## Outcome
-Type system in place. All pages that use BaseLayout inherit Playfair Display headings and DM Sans body automatically.
+Type system in place. All pages using BaseLayout inherit Playfair Display headings and DM Sans body automatically.

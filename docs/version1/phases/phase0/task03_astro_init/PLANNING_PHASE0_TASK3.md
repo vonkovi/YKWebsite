@@ -1,64 +1,69 @@
 ---
 # PLANNING — Phase 0, Task 3: Astro Configuration
 
-**Status: Pending.** Depends on task05 (scaffold) completing first.
-
-This task covers post-scaffold configuration: Tailwind, DaisyUI, Content Collections schema.
+**Status: Complete.**
 
 ---
 
-## Step 1: Configure Tailwind (`tailwind.config.mjs`)
+## Step 1: Configure Tailwind
 
-Replace the auto-generated config with:
+**Planned:** Edit `tailwind.config.mjs` with DaisyUI plugin, font families, custom colors.
+**Actual:** No `tailwind.config.mjs` in Tailwind v4. All config done in `src/styles/global.css` via `@theme {}`.
 
-```js
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}'],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['DM Sans', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
-      },
-      colors: {
-        'yk-dark': '#2b2b2b',
-        'yk-beige': '#f5f0e8',
-        'yk-white': '#ffffff',
-      },
-    },
-  },
-  plugins: [require('daisyui')],
-  daisyui: {
-    themes: false,
-    logs: false,
-  },
-};
+Actual `src/styles/global.css`:
+```css
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme {
+  --font-sans: 'DM Sans Variable', sans-serif;
+  --font-serif: 'Playfair Display Variable', serif;
+
+  --color-yk-dark: #2b2b2b;
+  --color-yk-beige: #f5f0e8;
+  --color-yk-white: #ffffff;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-yk-white);
+    color: var(--color-yk-dark);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
 ```
-
-**Verify:** `.astro` is in the content glob — DaisyUI classes get purged without it.
 
 ---
 
 ## Step 2: Verify `astro.config.mjs`
 
-`npx astro add tailwind` patches this automatically. Verify it looks like:
+**Planned:** `@astrojs/tailwind` integration.
+**Actual:** `@tailwindcss/vite` Vite plugin (Tailwind v4 approach).
 
+Actual `astro.config.mjs`:
 ```js
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  integrations: [tailwind()],
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
 ```
 
 ---
 
-## Step 3: Create Content Collections Config (`src/content.config.ts`)
+## Step 3: Create Content Collections Config
 
+Actual `src/content.config.ts`:
 ```ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'zod';
 import { glob } from 'astro/loaders';
 
 const projects = defineCollection({
@@ -107,25 +112,20 @@ export const collections = { projects, orgs, blog };
 
 ---
 
-## Step 4: Type-check
+## Step 4: Type-check Result
 
-```bash
-npx astro check
 ```
-
-Expected: zero errors.
+Result (5 files): 0 errors, 0 warnings, 0 hints
+```
 
 ---
 
 ## Checklist
 
-- [ ] `tailwind.config.mjs` updated (DaisyUI, fonts, colors, content glob)
-- [ ] `astro.config.mjs` verified (tailwind integration present)
-- [ ] `src/content.config.ts` created with all three collection schemas
-- [ ] `npx astro check` passes with zero errors
-
-## Depends On
-- task05_astro_scaffold complete (scaffold must exist before configuring)
+- [x] Tailwind configured via `@theme {}` in `global.css` (DaisyUI, fonts, colors)
+- [x] `astro.config.mjs` verified (`@tailwindcss/vite` Vite plugin present)
+- [x] `src/content.config.ts` created with all three collection schemas
+- [x] `npx astro check` passes with zero errors
 
 ## Outcome
 Astro project fully configured. Content Collections typed and ready for content.

@@ -1,51 +1,47 @@
 ---
 # PLANNING — Phase 0, Task 5: Astro Scaffold Execution
 
-**Status: Pending.** This is the first implementation task — runs before task03 and task04.
+**Status: Complete.**
 
 ---
 
 ## Execution Order
 
-This task runs FIRST among implementation tasks. Tasks 03 and 04 depend on this completing.
+Ran FIRST. Tasks 03 and 04 depended on this completing.
 
 ---
 
 ## Step 1: Scaffold Astro
 
-Run from `C:\Users\kmyn7\Projects\YKWebsite\`:
+Directory was not empty — CLI refused to scaffold into `.`. Workaround: scaffold into `_temp/`, move files up.
 
 ```bash
-npm create astro@latest . -- --template minimal --typescript strict --no-git
+npm create astro@latest _temp -- --template minimal --typescript strict --no-git --yes
+cp -r _temp/. .
+rm -rf _temp
 ```
 
-- `.` = scaffold into current directory
-- `--template minimal` = empty project, no sample pages
-- `--typescript strict` = strict tsconfig
-- `--no-git` = git handled separately in task06
-
-If the CLI prompts despite flags, select:
-- Template: Empty
-- TypeScript: Strict
-- Install dependencies: Yes
-- Git: No
+Installed: Astro **6.1.8** (not 5.x as researched).
 
 ---
 
 ## Step 2: Add Tailwind Integration
 
 ```bash
-npx astro add tailwind
+npx astro add tailwind --yes
 ```
 
-Accept all prompts (yes to install, yes to config changes).
+Installed: Tailwind **v4.2.4** (`@tailwindcss/vite`) — not Tailwind v3. No `tailwind.config.mjs` created. Creates `src/styles/global.css` with `@import "tailwindcss"`.
 
 ---
 
-## Step 3: Install DaisyUI v4
+## Step 3: Install DaisyUI v5
+
+**Planned:** `npm install -D daisyui@4`
+**Actual:** `npm install daisyui` (v5.5.19) — Tailwind v4 requires DaisyUI v5.
 
 ```bash
-npm install -D daisyui@4
+npm install daisyui
 ```
 
 ---
@@ -67,34 +63,44 @@ mkdir -p src/components src/layouts src/styles
 
 ---
 
-## Step 6: Verify Build
+## Step 6: Install `@astrojs/check`
+
+Not auto-installed. Required separately:
 
 ```bash
-npx astro check
-npm run build
+npm install @astrojs/check typescript
 ```
-
-Both must pass with zero errors before proceeding to task03 and task04.
 
 ---
 
-## Expected File Tree After This Task
+## Step 7: Verify Build
+
+```
+npx astro check  →  0 errors, 0 warnings, 0 hints
+npm run build    →  1 page built in 971ms
+```
+
+---
+
+## Actual File Tree After This Task
 
 ```
 YKWebsite/
   src/
     content/
-      projects/     ← empty, ready for MDX
-      orgs/         ← empty, ready for MDX
-      blog/         ← empty, ready for MDX
-    components/     ← empty
-    layouts/        ← empty
-    styles/         ← empty
+      projects/       ← empty
+      orgs/           ← empty
+      blog/           ← empty
+    content.config.ts
+    components/
+    layouts/
+      BaseLayout.astro
+    styles/
+      global.css      ← Tailwind v4 CSS config (no tailwind.config.mjs)
     pages/
-      index.astro   ← default placeholder
+      index.astro
   public/
-  astro.config.mjs  ← tailwind integration added
-  tailwind.config.mjs
+  astro.config.mjs    ← @tailwindcss/vite vite plugin
   tsconfig.json
   package.json
   .gitignore
@@ -104,17 +110,18 @@ YKWebsite/
 
 ## Checklist
 
-- [ ] `npm create astro@latest` run successfully
-- [ ] `npx astro add tailwind` run successfully
-- [ ] `npm install -D daisyui@4` run successfully
-- [ ] Fontsource packages installed
-- [ ] Directory structure created (content/projects, content/orgs, content/blog, components, layouts, styles)
-- [ ] `npx astro check` passes
-- [ ] `npm run build` passes
+- [x] Astro scaffolded (v6.1.8 via `_temp/` workaround)
+- [x] `npx astro add tailwind` run (Tailwind v4 installed)
+- [x] `npm install daisyui` run (v5.5.19)
+- [x] Fontsource packages installed
+- [x] Directory structure created
+- [x] `@astrojs/check` installed
+- [x] `npx astro check` passes (0 errors)
+- [x] `npm run build` passes
 
-## Unlocks
-- task03_astro_init (configuration)
-- task04_typography (fonts + layout)
+## Unlocked
+- task03_astro_init ✓
+- task04_typography ✓
 
 ## Outcome
-Clean, buildable Astro project ready for configuration.
+Clean, buildable Astro 6 project. Ready for configuration.

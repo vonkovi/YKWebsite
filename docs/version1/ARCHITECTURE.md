@@ -164,6 +164,19 @@ tags: string[]
 - **Layout:** Thin-line borders, generous whitespace, consistent header placement on every page
 - **Typography:** Playfair Display (headings) + DM Sans (body)
 
+### Border Rule
+All structural borders use exactly: `border border-yk-dark` (1px solid #2b2b2b). No box-shadows. No rounded corners. No thick borders.
+
+| Element | Class applied |
+|---------|--------------|
+| Page outer wrapper | `border border-yk-dark mx-4 my-4` |
+| Header bottom | `border-b border-yk-dark` |
+| Footer top | `border-t border-yk-dark` |
+| Icon buttons | `border border-yk-dark` |
+| Nav button | `border border-yk-dark` |
+| Quote box (footer) | `border border-yk-dark` |
+| Grid tiles (Phase 3) | `border border-yk-dark` |
+
 ---
 
 ## Key Invariants

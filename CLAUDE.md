@@ -19,14 +19,24 @@ src/                  ← Astro source (active development)
     orgs/             ← MDX — one file per org
     blog/             ← MDX — one file per post
   content.config.ts   ← Zod schemas for all three collections
-  components/         ← Reusable Astro components
-  layouts/            ← Page layout wrappers (BaseLayout.astro)
+  components/
+    Header.astro      ← Universal header (branding, 5 icons, pageName, zone nav)
+    Footer.astro      ← North Star footer (mission statement + hatch quote box)
+  layouts/
+    BaseLayout.astro  ← HTML shell (fonts, global.css, meta tags)
+    PortfolioLayout.astro ← Portfolio zone wrapper (border box + Header + Footer)
+    BlogLayout.astro  ← Blog zone wrapper (border box + Header + Footer)
   pages/              ← File-based routing
+    index.astro       ← Landing page (portfolio zone)
+    projects/         ← /projects and /projects/[slug]
+    orgs/             ← /orgs and /orgs/[slug]
+    blog/             ← /blog and /blog/[slug]
   styles/
-    global.css        ← Tailwind v4 config (@theme, @plugin "daisyui")
+    global.css        ← Tailwind v4 config (@theme, @plugin "daisyui", .hatch utility)
 docs/                 ← Architecture, planning, and status docs (version1/)
 public/               ← Static assets (resume PDF, images)
 setup.sh              ← First-time setup script
+update.sh             ← Pull + sync deps + type-check + build
 ```
 
 ---

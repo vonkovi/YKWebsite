@@ -1,0 +1,28 @@
+---
+title: "STARS"
+category: "Image Processing"
+order: 4
+description: "An image-processing pipeline that finds stars in astrophotography frames using thresholding and morphological masks."
+lede: "An image-processing pipeline that pulls real stars out of noisy astrophotography frames using thresholding and morphological masks."
+year: 2025
+stack: ["Python", "NumPy", "OpenCV"]
+source: "https://github.com/vonkovi/stars"
+---
+
+STARS takes a noisy long-exposure sky frame and pulls the real stars out of the grain — separating faint point sources from sensor noise and hot pixels, then labeling each detection with its position and brightness.
+
+## The problem
+
+A long exposure is mostly noise. Hot pixels masquerade as stars, the background isn't flat, and the faintest real sources sit barely above the floor. The job is to be sensitive enough to catch them without lighting up on every speckle.
+
+## The pipeline
+
+Adaptive **thresholding** isolates bright regions against a locally estimated background; **morphological masks** clean up speckle and merge detections a single threshold would split in two; a connected-components pass then extracts each star's centroid and integrated intensity.
+
+- Adaptive thresholding tuned for low signal-to-noise frames.
+- Morphological cleanup to reject hot pixels and noise.
+- Centroid and brightness extraction per detected star.
+
+## What I learned
+
+Classical image processing still earns its keep. Before reaching for anything heavier, a well-chosen threshold and the right morphological operator solve a surprising amount — and they're fast, legible, and easy to trust.

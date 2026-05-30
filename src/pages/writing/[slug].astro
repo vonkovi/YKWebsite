@@ -1,0 +1,55 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// One reading page per essay. The MDX body renders into the prose column.
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+// Date label: YYYY · MM
+const dateLabel = (d: Date) =>
+  `${d.getUTCFullYear()} · ${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+---
+
+<BaseLayout
+  title={`${post.data.title} — Yvon Kim`}
+  description={`${post.data.title} — an essay by Yvon Kim.`}
+>
+  <Header variant="subnav" backHref="/#writing" backLabel="Writing" />
+
+  <main class="detail">
+    <div class="wrap">
+      <header class="essay-head">
+        <p class="essay-date">{dateLabel(post.data.date)}</p>
+        <h1>{post.data.title}</h1>
+      </header>
+
+      <div class="detail-body">
+        <article class="prose">
+          <Content />
+        </article>
+
+        <div class="detail-foot">
+          <a class="back-link" href="/#writing"><span class="arr" aria-hidden="true">←</span> All writing</a>
+          <span class="footer-copy">© 2026 Yvon Kim</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

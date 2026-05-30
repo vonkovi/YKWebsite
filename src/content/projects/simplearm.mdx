@@ -1,0 +1,32 @@
+---
+title: "SimpleArm"
+category: "Robotics"
+order: 2
+description: "A six-degree-of-freedom dexterous arm built from scratch — mechanical design, servo-driver electronics, and real-time inverse kinematics."
+lede: "Built from scratch, end to end — the mechanical design, the servo-driver electronics, and the real-time inverse kinematics that make it move."
+year: 2025
+stack: ["Fusion 360", "C++", "STM32", "custom PCB"]
+source: "https://github.com/vonkovi/simplearm"
+---
+
+SimpleArm is a six-degree-of-freedom desktop manipulator I designed end to end — the linkage geometry, the board that drives six servos cleanly, and the firmware that turns a target pose into smooth, deliberate motion.
+
+## Mechanical
+
+The arm is six revolute joints in a wrist-partitioned layout: three for position, three for orientation. I modeled the linkages in **Fusion 360** around the torque each joint actually has to hold, then iterated on the print until the play at the wrist was small enough to ignore.
+
+## Electronics
+
+Driving six servos off one rail browns out the moment two of them move together. The custom driver board gives each channel clean, decoupled power and isolates the logic supply from the motor supply, so a heavy move never resets the microcontroller mid-trajectory.
+
+## Firmware
+
+The controller solves **inverse kinematics** every cycle — mapping a desired end-effector pose to six joint angles in closed form — then feeds smoothed setpoints to the servo loop. Smoothing is the difference between motion that looks robotic and motion that looks intentional.
+
+- Closed-form IK solved on-device every control tick.
+- Custom driver board for clean, decoupled six-channel power.
+- Trajectory smoothing so paths read as continuous, not stepped.
+
+## What I learned
+
+Most of the time went into things that never show up in a demo video — power integrity, mechanical slop, unglamorous tolerances. The arm only looks simple because the hard parts are hidden, which is rather the point.

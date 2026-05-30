@@ -1,13 +1,33 @@
 ---
 title: "SIM42"
-description: "A simulator for human society."
-date: 2024-03-01
-featured: true
-pinned: true
-heroImage: "/images/projects/placeholder.jpg"
-tags: ["Python", "Simulation", "AI"]
-githubUrl: "https://github.com/yvonkim/sim42"
-type: "fullstack"
+category: "Distributed Systems"
+order: 1
+description: "A distributed, agent-based simulation that runs 100+ LLMs in parallel to watch emergent social behavior unfold in real time."
+lede: "A distributed, agent-based simulation that runs 100+ LLMs in parallel to watch emergent social behavior unfold in real time."
+year: 2026
+stack: ["Python", "LangGraph", "asyncio", "WebSockets"]
+source: "https://github.com/vonkovi/sim42"
 ---
 
-SIM42 is a simulator for human society.
+SIM42 is a distributed, agent-based simulation built to study how social behavior emerges from many independent minds. Rather than scripting outcomes, it hands each of 100+ language-model agents its own memory, goals, and relationships — then lets them interact freely and watches what forms.
+
+## The idea
+
+Most multi-agent demos top out at a handful of agents sharing one loop. The behavior worth studying — coalitions forming, rumors spreading, norms hardening — only appears at scale. Getting to scale is an engineering problem long before it is a research one, and closing that gap is what SIM42 is really about.
+
+## How it works
+
+A scheduler fans work across the agent pool with **asyncio**, so 100+ model calls advance concurrently instead of blocking one another. Each agent runs a small perceive → reflect → act loop held in LangGraph, while a shared world model resolves everyone's actions into a single consistent state on every tick.
+
+- Concurrent agent loop that keeps 100+ models busy without head-of-line blocking.
+- Per-agent memory with retrieval, so choices stay grounded in history.
+- A shared world model that serializes conflicting actions deterministically.
+- A live WebSocket feed driving the observability suite.
+
+## Watching it run
+
+The dashboard is half the project. A live graph shows who is talking to whom; message volume, sentiment, and faction membership update as the simulation ticks forward. Emergence is only interesting if you can see it, so making the run legible took as much effort as making it happen.
+
+## What I learned
+
+The hard limits were backpressure and cost, not cleverness. Keeping a hundred models busy means treating rate limits and token budgets as first-class parts of the scheduler rather than afterthoughts. The lesson that stuck: at scale, the infrastructure **is** the experiment.

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SimpleArm — Yvon Kim</title>
+<meta name="description" content="SimpleArm — a six-degree-of-freedom dexterous arm built from scratch: mechanics, servo electronics, and real-time inverse kinematics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav subnav">
+  <nav class="nav-inner">
+    <div class="nav-left">
+      <a class="brand" href="index.html">Yvon&nbsp;Kim</a>
+      <a class="back-link" href="index.html#projects"><span class="arr" aria-hidden="true">←</span> Work</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-social">
+        <a href="mailto:kmyn7up@gmail.com" aria-label="Email" title="Email">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M2 4l6 4.5L14 4"/></svg>
+        </a>
+        <a href="https://github.com/vonkovi" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/yvonkim" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.6 0H2.4A2.4 2.4 0 000 2.4v11.2A2.4 2.4 0 002.4 16h11.2a2.4 2.4 0 002.4-2.4V2.4A2.4 2.4 0 0013.6 0zM4.8 13.3H2.7V6.4h2.1v6.9zM3.7 5.5a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4zm9.6 7.8h-2.1V9.9c0-.85-.02-1.95-1.19-1.95-1.19 0-1.37.93-1.37 1.89v3.46H6.6V6.4h2v.94h.03c.28-.53.96-1.09 1.98-1.09 2.12 0 2.51 1.4 2.51 3.21v3.84z"/></svg>
+        </a>
+        <span class="nav-div" aria-hidden="true"></span>
+        <a class="resume-link" href="assets/Yvon-Kim-Resume.pdf" download aria-label="Download résumé (PDF)" title="Résumé (PDF)">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.6H3.8a1.1 1.1 0 00-1.1 1.1v10.6a1.1 1.1 0 001.1 1.1h8.4a1.1 1.1 0 001.1-1.1V6.1L9 1.6z"/><path d="M8.9 1.7V6h4.3"/><path d="M5.2 9h5.6M5.2 11.4h3.9"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="detail">
+  <div class="wrap">
+
+    <header class="detail-head">
+      <p class="detail-cat">Robotics</p>
+      <h1>SimpleArm</h1>
+      <p class="detail-lede">Built from scratch, end to end — the <strong>mechanical design</strong>, the servo-driver electronics, and the real-time inverse kinematics that make it move.</p>
+
+      <div class="detail-meta">
+        <div class="m"><span class="k">Year</span><span class="v">2025</span></div>
+        <div class="m"><span class="k">Stack</span><span class="v">Fusion 360 · C++ · STM32 · custom PCB</span></div>
+        <a class="source-btn" href="https://github.com/vonkovi/simplearm" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View source</a>
+      </div>
+    </header>
+
+    <div class="detail-hero">
+      <image-slot id="simplearm-hero" placeholder="Drop the SimpleArm hero — the assembled arm or a CAD render"></image-slot>
+    </div>
+
+    <div class="detail-body">
+      <article class="prose">
+        <p>SimpleArm is a six-degree-of-freedom desktop manipulator I designed end to end — the linkage geometry, the board that drives six servos cleanly, and the firmware that turns a target pose into smooth, deliberate motion.</p>
+        <h2>Mechanical</h2>
+        <p>The arm is six revolute joints in a wrist-partitioned layout: three for position, three for orientation. I modeled the linkages in <strong>Fusion 360</strong> around the torque each joint actually has to hold, then iterated on the print until the play at the wrist was small enough to ignore.</p>
+        <figure>
+          <image-slot id="simplearm-fig1" placeholder="Drop a CAD render or a photo of the assembled arm"></image-slot>
+          <figcaption>FIG 1 — The six-joint, wrist-partitioned linkage.</figcaption>
+        </figure>
+        <h2>Electronics</h2>
+        <p>Driving six servos off one rail browns out the moment two of them move together. The custom driver board gives each channel clean, decoupled power and isolates the logic supply from the motor supply, so a heavy move never resets the microcontroller mid-trajectory.</p>
+        <h2>Firmware</h2>
+        <p>The controller solves <strong>inverse kinematics</strong> every cycle — mapping a desired end-effector pose to six joint angles in closed form — then feeds smoothed setpoints to the servo loop. Smoothing is the difference between motion that looks robotic and motion that looks intentional.</p>
+        <ul>
+          <li>Closed-form IK solved on-device every control tick.</li>
+          <li>Custom driver board for clean, decoupled six-channel power.</li>
+          <li>Trajectory smoothing so paths read as continuous, not stepped.</li>
+        </ul>
+        <h2>What I learned</h2>
+        <p>Most of the time went into things that never show up in a demo video — power integrity, mechanical slop, unglamorous tolerances. The arm only looks simple because the hard parts are hidden, which is rather the point.</p>
+      </article>
+
+      <div class="detail-foot">
+        <a class="back-link" href="index.html#projects"><span class="arr" aria-hidden="true">←</span> All work</a>
+        <a class="source-btn" href="https://github.com/vonkovi/simplearm" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> View source</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="footer-links">
+        <a href="mailto:kmyn7up@gmail.com">Email</a>
+        <a href="https://github.com/vonkovi" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/yvonkim" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="assets/Yvon-Kim-Resume.pdf" download>Résumé ↓</a>
+      </div>
+      <span class="footer-copy">© 2026 Yvon Kim</span>
+    </div>
+  </div>
+</footer>
+
+<script src="image-slot.js"></script>
+</body>
+</html>

@@ -1,17 +1,27 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mv task1 *)",
-      "Bash(mv task2 *)",
-      "Bash(mv task3 *)",
-      "Bash(npm create *)",
-      "Bash(npx astro *)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp webfetch-1780026155246-o4e005.bin design.gz)",
+      "Bash(gunzip -k -f design.gz)",
+      "Bash(mkdir -p design_extract)",
+      "Bash(tar -xf design -C design_extract)",
+      "Bash(git ls-tree *)",
+      "Bash(git restore *)",
+      "Bash(rm -rf src/content/orgs src/pages/blog src/pages/orgs src/pages/projects)",
+      "Bash(rm -f src/layouts/BlogLayout.astro src/layouts/PortfolioLayout.astro)",
+      "Bash(rm -f src/content/projects/awebohack_hardware.mdx src/content/projects/placeholder_project_4.mdx src/content/projects/placeholder_project_5.mdx src/content/projects/placeholder_project_6.mdx src/content/projects/portfolio_site.mdx)",
+      "Bash(rm -f src/content/projects/sim42.mdx)",
+      "Bash(rm -f src/content/blog/building_in_public.mdx src/content/blog/getting_started_with_astro.mdx src/content/blog/work_in_a_cubicle.mdx)",
       "Bash(npm install *)",
+      "Bash(npx astro *)",
       "Bash(npm run *)",
-      "Bash(git init *)",
-      "Bash(git add *)",
-      "Bash(git commit *)",
-      "Bash(chmod +x *)"
+      "Bash(cd /tmp)",
+      "Bash(curl -s -L \"https://api.anthropic.com/v1/design/h/goZtS7kEdcwgIYB0SurrcQ\" -o design.bin)",
+      "Bash(mkdir -p design)",
+      "Bash(tar -xzf design.bin -C design)",
+      "Bash(cp -r /tmp/design /mnt/c/Users/kmyn7/Projects/YKWebsite/.design-tmp)",
+      "Bash(cp -r /tmp/design \"C:/Users/kmyn7/Projects/YKWebsite/.design-tmp\")"
     ]
   }
 }

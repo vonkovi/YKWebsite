@@ -1,0 +1,28 @@
+---
+title: "BOP-IT"
+category: "Embedded Systems"
+order: 3
+description: "A reaction game on a bare AVR microcontroller, written in C against registers and interrupts — doing a lot with very little memory."
+lede: "Written in C straight against an AVR's registers and interrupts — doing a lot with very little memory."
+year: 2025
+stack: ["C", "AVR / ATmega", "timers", "interrupts"]
+source: "https://github.com/vonkovi/bop-it"
+---
+
+BOP-IT is the classic call-and-react toy rebuilt on bare metal — no framework, no operating system, just C talking straight to an AVR microcontroller's timers, ports, and interrupt vectors.
+
+## The constraint
+
+Working this close to the chip is the whole point. There is no allocator to lean on and no scheduler to hide behind; every byte of RAM and every clock cycle is something you account for yourself. The game has to fit in a few kilobytes and still feel instant.
+
+## How it works
+
+A hardware timer drives the round clock while an **interrupt-driven input loop** samples the controls — so the chip never sits in a busy-wait. As rounds speed up the timing budget shrinks, and an interrupt-first design is what keeps inputs responsive when there is no slack left.
+
+- Interrupt-driven input — no blocking polls.
+- Hardware timers for precise, accelerating round windows.
+- Entire game state kept in a few kilobytes of RAM.
+
+## What I learned
+
+Constraints are clarifying. With nothing to abstract the hardware away, you understand exactly what the machine is doing on every cycle — and that understanding is worth more than any framework I could have reached for instead.

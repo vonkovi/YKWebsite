@@ -1,0 +1,29 @@
+---
+title: "ClaudeRPID"
+category: "Developer Tooling"
+order: 5
+description: "A golden-standard project template that turns Claude Code from a fast coder into a disciplined engineer — enforcing a Research → Plan → Implement → Debug cycle backed by living documentation."
+lede: "A stack-agnostic template that makes an AI coding agent work like a disciplined engineer — design before code, and a project memory that survives across sessions."
+year: 2026
+stack: ["Claude Code", "Markdown", "GitHub Actions"]
+source: "https://github.com/vonkovi/ClaudeRPID"
+---
+
+ClaudeRPID is a project template I built to fix the failure mode that makes AI coding agents frustrating: they write fast, but they forget. The whole template is organized around a single premise — **lost context and outdated context are the only real enemies** — and every rule in it is aimed at preventing one of those two.
+
+## The method
+
+The workflow is a four-track cycle, **RPID**: Research → Plan → Implement → Debug. Each phase has to finish before the next begins, so design decisions are made and written down *before* a line of code exists, not reverse-engineered afterward. It turns the agent from something that sprints toward a guess into something that commits to a plan and then executes it.
+
+## Living documentation
+
+The backbone is a set of documents that travel with the project and stay current — `STATUS`, `DECISIONS`, `ARCHITECTURE`, `DATA_MODEL`, and `PLANNING`. They're not write-once artifacts; they're the agent's memory between sessions. When a new session starts cold, the context it needs is already on disk instead of lost to the previous conversation.
+
+- A prompt library with a tailored prompt for each RPID phase.
+- A GitHub Actions test gate so nothing merges without passing CI.
+- Solo and team collaboration modes from the same structure.
+- Opt-in profiles for language- and framework-specific tooling, so the core stays stack-agnostic.
+
+## What I learned
+
+The interesting part isn't the prompts — it's that most of an agent's mistakes are really *context* mistakes. Give it a structure that forces decisions to be recorded and kept fresh, and a lot of the "AI did something dumb" problems quietly disappear. The discipline lives in the scaffolding, not the model.

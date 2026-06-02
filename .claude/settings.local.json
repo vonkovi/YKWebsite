@@ -21,7 +21,13 @@
       "Bash(mkdir -p design)",
       "Bash(tar -xzf design.bin -C design)",
       "Bash(cp -r /tmp/design /mnt/c/Users/kmyn7/Projects/YKWebsite/.design-tmp)",
-      "Bash(cp -r /tmp/design \"C:/Users/kmyn7/Projects/YKWebsite/.design-tmp\")"
+      "Bash(cp -r /tmp/design \"C:/Users/kmyn7/Projects/YKWebsite/.design-tmp\")",
+      "Bash(git --no-pager diff --stat HEAD)",
+      "Bash(git *)",
+      "Bash(gh auth *)",
+      "Bash(gh --version)",
+      "PowerShell($gh = Get-Command gh -ErrorAction SilentlyContinue; if \\($gh\\) { \"gh found: $\\($gh.Source\\)\"; gh auth status 2>&1 | Select-Object -First 4 } else { \"gh NOT found\" })",
+      "Bash(echo \"EXIT:$?\")"
     ]
   }
 }

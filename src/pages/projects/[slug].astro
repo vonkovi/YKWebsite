@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import ProjectMedia from '../../components/ProjectMedia.astro';
 
 // One case-study page per project. The MDX body renders into the prose column.
 export async function getStaticPaths() {
@@ -18,7 +19,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
-const { title, category, description, lede, year, stack, source, image } = project.data;
+const { title, category, description, lede, year, stack, source, image, video } = project.data;
 const { Content } = await render(project);
 ---
 
@@ -52,13 +53,7 @@ const { Content } = await render(project);
         </div>
       </header>
 
-      <div class="detail-hero">
-        {image ? (
-          <img src={image} alt={title} />
-        ) : (
-          <div class="hero-empty"><span class="placeholder">{title}</span></div>
-        )}
-      </div>
+      <ProjectMedia image={image} video={video} title={title} kind="hero" />
 
       <div class="detail-body">
         <article class="prose">

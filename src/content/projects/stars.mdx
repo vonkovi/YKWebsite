@@ -1,28 +1,33 @@
 ---
-title: "STARS"
+title: "JWST-StarClustering"
 category: "Image Processing"
 order: 4
-description: "An image-processing pipeline that finds stars in astrophotography frames using thresholding and morphological masks."
-lede: "An image-processing pipeline that pulls real stars out of noisy astrophotography frames using thresholding and morphological masks."
+description: "Multi-scale decomposition of a JWST deep-field image that separates a single frame into stars, dust, and galaxies by spatial frequency."
+lede: "A MATLAB pipeline that pulls stars, dust, and galaxies out of a single JWST image — separating them by scale, not color, with unsharp masking and Difference-of-Gaussians."
 year: 2025
-stack: ["Python", "NumPy", "OpenCV"]
-source: "https://github.com/vonkovi/stars"
+stack: ["MATLAB", "Image Processing Toolbox"]
+source: "https://github.com/vonkovi/JWST-StarClustering"
+image: "/projects/jwst.png"
 ---
 
-STARS takes a noisy long-exposure sky frame and pulls the real stars out of the grain — separating faint point sources from sensor noise and hot pixels, then labeling each detection with its position and brightness.
+JWST-StarClustering takes a single James Webb deep-field frame — Stephan's Quintet — and pulls it apart into three populations: stars, dust, and galaxies. The guiding idea is that the structures worth isolating are separated not by color, but by **size**, so the whole pipeline is built on spatial-frequency filtering rather than thresholding.
 
-## The problem
+## The idea
 
-A long exposure is mostly noise. Hot pixels masquerade as stars, the background isn't flat, and the faintest real sources sit barely above the floor. The job is to be sensitive enough to catch them without lighting up on every speckle.
+In a dark-sky JWST frame, stars are compact point sources, dust is mid-scale clumpy structure, and galaxies are large luminous bodies. Those are three different *scales*, which means scale-space filtering can separate them cleanly where a single brightness threshold would just smear them together.
 
 ## The pipeline
 
-Adaptive **thresholding** isolates bright regions against a locally estimated background; **morphological masks** clean up speckle and merge detections a single threshold would split in two; a connected-components pass then extracts each star's centroid and integrated intensity.
+The image is lightly denoised with a 3×3 Gaussian blur (σ=0.5), then converted RGB → HSV so the work happens on the **Value** (brightness) channel, which stays stable across dark sky. Each population is then isolated with a different band of spatial frequencies:
 
-- Adaptive thresholding tuned for low signal-to-noise frames.
-- Morphological cleanup to reject hot pixels and noise.
-- Centroid and brightness extraction per detected star.
+- **Stars** — high-pass via unsharp masking: `Value − blur(σ=8)`, keeping only the sharpest point sources.
+- **Dust** — band-pass Difference-of-Gaussians: `blur(σ=18) − blur(σ=1)`, for mid-scale clumps.
+- **Galaxies** — wider band-pass: `blur(σ=18) − blur(σ=100)`, for the large, slow structure.
+
+## The result
+
+The single input frame separates into three clean layers: stars carrying JWST's characteristic six-point diffraction spikes, the mid-scale dust of star-forming regions, and the five galaxies of Stephan's Quintet resolved as distinct blobs. Each stage is written out so the decomposition is reproducible end to end.
 
 ## What I learned
 
-Classical image processing still earns its keep. Before reaching for anything heavier, a well-chosen threshold and the right morphological operator solve a surprising amount — and they're fast, legible, and easy to trust.
+This is exactly the front-end stage of professional astronomy pipelines — source separation and background estimation, the same job tools like SExtractor do at NASA/JPL and Caltech/IPAC. The lesson that stuck is that principled, reproducible parameter choices matter more than clever ones: pick your scales deliberately and the structure falls out on its own.

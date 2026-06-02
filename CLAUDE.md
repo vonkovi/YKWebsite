@@ -16,7 +16,7 @@ YvonKim.com is a personal portfolio + writing site for Yvon Kim — electrical e
 src/                  ← Astro source
   content/
     projects/         ← MDX — one file per project (frontmatter only; body unused)
-    blog/             ← MDX — one file per essay (body renders inline on Writing tab)
+    blog/             ← MDX — one file per essay (body renders on its /writing/<slug> page, not inline)
   content.config.ts   ← Zod schemas: projects + blog (NO orgs)
   components/
     Header.astro      ← Sticky nav: wordmark + tabs (left), social + résumé icons (right)
@@ -79,7 +79,9 @@ Both detail types use `Header` in its **`subnav`** variant (wordmark + a `←` b
 - **Routes are `/`, `/projects/<slug>`, and `/writing/<slug>` only.** No `/projects` or `/blog` index pages, no `/orgs`. Projects and writing entries link out to their own detail page; don't add other routes without being asked.
 - **No Organizations.** That collection was removed in the redesign.
 - Projects are content-driven by the `projects` collection and ordered by the `order` field — never hardcode the list.
-- A project shows a real `<img>` when frontmatter has `image`; otherwise a quiet placeholder well (the project title in faint mono). Drop real screenshots in via `image:`.
+- A project shows a real `<img>` when frontmatter has `image`; otherwise a quiet placeholder well (the project title in faint mono). Drop real screenshots in via `image:`. Project image wells (row + detail hero) render through `components/ProjectMedia.astro`.
+- Optional `video:` frontmatter on a project adds a **hover-preview**: the image shows by default, and hovering plays the video muted with no controls (so it can't be scrubbed/rewound); on mouse-leave it pauses and keeps its position — forward-only, never rewinds. Disabled under `prefers-reduced-motion`. No `video` → just the image.
+- **Images** live in `public/` (e.g. `public/projects/`, `public/blog/`) and are referenced by root-absolute path (`/projects/foo.png`). Use `image:` frontmatter for a project's row/hero; inside any MDX body use Markdown `![alt](/path)` or an HTML `<figure>`/`<figcaption>`. `.prose img` and `.prose figure` are styled in `global.css` (bordered, rounded, captioned). No `astro:assets` optimization — size images before adding.
 - Light mode only — no dark mode toggle.
 - Header icons: Email (mailto), GitHub, LinkedIn, then a divider, then Résumé (downloads `/Yvon-Kim-Resume.pdf`). Footer repeats the same four as text links.
 - Reveal/hover motion must never hide content: viewport-based reveal with re-runs, fully disabled under `prefers-reduced-motion`.

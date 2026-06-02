@@ -12,6 +12,9 @@ const projects = defineCollection({
     description: z.string(),
     order: z.number(),
     image: z.string().optional(),
+    // Optional hover-preview video — plays (no controls) when the image is hovered.
+    // Falls back to just the image when absent. See components/ProjectMedia.astro.
+    video: z.string().optional(),
     // Case-study detail-page fields (all optional; meta items are omitted when absent).
     lede: z.string().optional(),
     year: z.number().optional(),

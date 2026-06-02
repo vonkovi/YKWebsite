@@ -1,0 +1,44 @@
+---
+// Project image well with an optional hover-preview video.
+// - No image  → quiet placeholder well (title in faint mono).
+// - image only → static <img>.
+// - image + video → the <img> shows by default; hovering plays the video (muted,
+//   no controls, so it can't be scrubbed/rewound). On leave it pauses and keeps
+//   its position — it only ever moves forward, never rewinds.
+// `kind` picks the wrapper: 'row' (index card) or 'hero' (detail page).
+interface Props {
+  image?: string;
+  video?: string;
+  title: string;
+  kind?: 'row' | 'hero';
+}
+const { image, video, title, kind = 'row' } = Astro.props;
+const wrapClass = kind === 'hero' ? 'detail-hero' : 'proj-media';
+---
+
+{image ? (
+  <div class:list={[wrapClass, video && 'has-video']} data-media>
+    <img src={image} alt={title} loading={kind === 'row' ? 'lazy' : undefined} />
+    {video && (
+      <video data-hover-video src={video} muted playsinline preload="metadata" aria-hidden="true"></video>
+    )}
+  </div>
+) : kind === 'hero' ? (
+  <div class="detail-hero"><div class="hero-empty"><span class="placeholder">{title}</span></div></div>
+) : (
+  <div class="proj-media is-empty"><span class="placeholder">{title}</span></div>
+)}
+
+<script>
+  // Hover-to-play preview. Pause (not reset) on leave so the clip never rewinds.
+  const reduce =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-media].has-video').forEach((media) => {
+    const video = media.querySelector<HTMLVideoElement>('video[data-hover-video]');
+    if (!video) return;
+    media.addEventListener('mouseenter', () => {
+      if (!reduce) video.play().catch(() => {});
+    });
+    media.addEventListener('mouseleave', () => video.pause());
+  });
+</script>

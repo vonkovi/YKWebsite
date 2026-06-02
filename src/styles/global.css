@@ -473,6 +473,29 @@ html.js .post.in { opacity: 1; transform: none; }
   text-align: center;
 }
 
+/* hover-to-play preview video — no controls, never rewinds. See ProjectMedia.astro.
+   (.proj-media is already position:relative; .detail-hero needs it.) */
+.detail-hero.has-video { position: relative; }
+.proj-media.has-video video,
+.detail-hero.has-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .proj-media.has-video:hover video,
+  .detail-hero.has-video:hover video { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .proj-media.has-video video,
+  .detail-hero.has-video video { display: none; }
+}
+
 /* essay header — shares the reading column with the body */
 .essay-head {
   max-width: 68ch;
@@ -518,6 +541,40 @@ html.js .post.in { opacity: 1; transform: none; }
 .prose p strong { color: var(--ink); font-weight: 600; }
 .prose ul { margin: 0 0 18px; padding-left: 1.1em; color: var(--ink-soft); }
 .prose li { margin-bottom: 8px; line-height: 1.6; }
+
+/* inline media — Markdown `![alt](/path)` and HTML <img>/<video>/<figure> in the body */
+.prose img,
+.prose video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  margin: clamp(28px, 4vw, 40px) 0;
+  background: var(--bg-sunk);
+}
+.prose figure {
+  margin: clamp(28px, 4vw, 40px) 0;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--bg-sunk);
+}
+.prose figure img,
+.prose figure video {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+.prose figcaption {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line-soft);
+  background: var(--bg-panel);
+}
 
 .detail-foot {
   margin-top: clamp(48px, 7vw, 88px);

@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ProjectMedia from '../components/ProjectMedia.astro';
 
 // Projects — ordered by the `order` field.
 const projects = (await getCollection('projects')).sort(
@@ -29,15 +30,12 @@ const dateLabel = (d: Date) =>
           <div class="proj-grid">
             {projects.map((project) => (
               <article class="proj" data-href={`/projects/${project.id}`}>
-                {project.data.image ? (
-                  <div class="proj-media">
-                    <img src={project.data.image} alt={project.data.title} loading="lazy" />
-                  </div>
-                ) : (
-                  <div class="proj-media is-empty">
-                    <span class="placeholder">{project.data.title}</span>
-                  </div>
-                )}
+                <ProjectMedia
+                  image={project.data.image}
+                  video={project.data.video}
+                  title={project.data.title}
+                  kind="row"
+                />
                 <div class="proj-body">
                   <span class="proj-cat">{project.data.category}</span>
                   <h3><a class="proj-title-link" href={`/projects/${project.id}`}>{project.data.title}</a></h3>

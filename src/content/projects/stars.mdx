@@ -2,7 +2,7 @@
 title: "JWST-StarClustering"
 category: "Image Processing"
 order: 4
-description: "Multi-scale decomposition of a JWST deep-field image that separates a single frame into stars, dust, and galaxies by spatial frequency."
+description: "Multi-scale decomposition of a JWST deep-field image that separates a single frame into stars, dust, and galaxies by spatial frequency, then clusters the stars."
 lede: "A MATLAB pipeline that pulls stars, dust, and galaxies out of a single JWST image — separating them by scale, not color, with unsharp masking and Difference-of-Gaussians."
 year: 2025
 stack: ["MATLAB", "Image Processing Toolbox"]
@@ -10,24 +10,28 @@ source: "https://github.com/vonkovi/JWST-StarClustering"
 image: "/projects/jwst.png"
 ---
 
-JWST-StarClustering takes a single James Webb deep-field frame — Stephan's Quintet — and pulls it apart into three populations: stars, dust, and galaxies. The guiding idea is that the structures worth isolating are separated not by color, but by **size**, so the whole pipeline is built on spatial-frequency filtering rather than thresholding.
+JWST-StarClustering takes a single James Webb deep-field frame — Stephan's Quintet — and pulls it apart into three populations: stars, dust, and galaxies. The guiding idea: the structures worth isolating are separated not by color but by **size**, so the whole pipeline is spatial-frequency filtering rather than thresholding.
 
-## The idea
+### Separate by size, not color
 
-In a dark-sky JWST frame, stars are compact point sources, dust is mid-scale clumpy structure, and galaxies are large luminous bodies. Those are three different *scales*, which means scale-space filtering can separate them cleanly where a single brightness threshold would just smear them together.
+In a dark-sky frame, stars are compact point sources, dust is mid-scale clumpy structure, and galaxies are large luminous bodies — three different *scales*. Scale-space filtering (the Marr–Hildreth idea behind blob detection) separates them cleanly where a single brightness threshold would just smear them together.
 
-## The pipeline
+### The pipeline
 
-The image is lightly denoised with a 3×3 Gaussian blur (σ=0.5), then converted RGB → HSV so the work happens on the **Value** (brightness) channel, which stays stable across dark sky. Each population is then isolated with a different band of spatial frequencies:
+Lightly denoise with a 3×3 Gaussian (σ=0.5), then convert RGB → HSV and work only on the **Value** channel, which stays stable across dark sky where Hue and Saturation go numerically unstable. Each population is then isolated by a different band of spatial frequencies:
 
 - **Stars** — high-pass via unsharp masking: `Value − blur(σ=8)`, keeping only the sharpest point sources.
 - **Dust** — band-pass Difference-of-Gaussians: `blur(σ=18) − blur(σ=1)`, for mid-scale clumps.
 - **Galaxies** — wider band-pass: `blur(σ=18) − blur(σ=100)`, for the large, slow structure.
 
-## The result
+### From layers to clusters
 
-The single input frame separates into three clean layers: stars carrying JWST's characteristic six-point diffraction spikes, the mid-scale dust of star-forming regions, and the five galaxies of Stephan's Quintet resolved as distinct blobs. Each stage is written out so the decomposition is reproducible end to end.
+The star layer is the project's namesake payload: fed into unsupervised clustering (DBSCAN), it surfaces stellar associations and over-densities — the groupings that flag star-forming knots and tidal debris in an interacting system like the Quintet.
 
-## What I learned
+### The result
 
-This is exactly the front-end stage of professional astronomy pipelines — source separation and background estimation, the same job tools like SExtractor do at NASA/JPL and Caltech/IPAC. The lesson that stuck is that principled, reproducible parameter choices matter more than clever ones: pick your scales deliberately and the structure falls out on its own.
+The single input frame separates into three clean layers: stars carrying JWST's six-point diffraction spikes, the mid-scale dust of star-forming regions, and the five galaxies of Stephan's Quintet resolved as distinct blobs. Every stage is written out, so the decomposition is reproducible end to end.
+
+### What stuck
+
+This is exactly the front-end stage of professional astronomy pipelines — source separation and background estimation, the same job tools like SExtractor do for Spitzer, WISE, and 2MASS archives. The lesson: principled, reproducible parameter choices beat clever ones. Pick your scales deliberately and the structure falls out on its own.

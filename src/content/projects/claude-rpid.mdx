@@ -7,23 +7,34 @@ lede: "A stack-agnostic template that makes an AI coding agent work like a disci
 year: 2026
 stack: ["Claude Code", "Markdown", "GitHub Actions"]
 source: "https://github.com/vonkovi/ClaudeRPID"
+image: "/projects/claude-rpid.png"
 ---
 
-ClaudeRPID is a project template I built to fix the failure mode that makes AI coding agents frustrating: they write fast, but they forget. The whole template is organized around a single premise — **lost context and outdated context are the only real enemies** — and every rule in it is aimed at preventing one of those two.
+AI coding agents write fast but forget. ClaudeRPID is a stack-agnostic project template built around a single premise: **lost context and outdated context are the only real enemies**, and every rule in it kills one of the two.
 
-## The method
+### The loop
 
-The workflow is a four-track cycle, **RPID**: Research → Plan → Implement → Debug. Each phase has to finish before the next begins, so design decisions are made and written down *before* a line of code exists, not reverse-engineered afterward. It turns the agent from something that sprints toward a guess into something that commits to a plan and then executes it.
+Every task runs the same four tracks — **Feature** and **Tests** each as Research → Plan → Implement, a **Run** track for the local suite plus a required CI check, and a **Debug** track that loops back on a failure. Decisions get made and written down in Research and Planning, then *merely executed* in Implementation. Catch the agent making an architectural call while coding, and that's the signal to stop and go back a track.
 
-## Living documentation
+### Phase 0: vision before code
 
-The backbone is a set of documents that travel with the project and stay current — `STATUS`, `DECISIONS`, `ARCHITECTURE`, `DATA_MODEL`, and `PLANNING`. They're not write-once artifacts; they're the agent's memory between sessions. When a new session starts cold, the context it needs is already on disk instead of lost to the previous conversation.
+Every project opens with a vision interview that pins down what's being built — and what's deliberately *not* — anchored to a single **North Star metric** that every later trade-off is weighed against. Uncertainties are logged as open decisions, never guessed.
 
-- A prompt library with a tailored prompt for each RPID phase.
-- A GitHub Actions test gate so nothing merges without passing CI.
-- Solo and team collaboration modes from the same structure.
-- Opt-in profiles for language- and framework-specific tooling, so the core stays stack-agnostic.
+### Living docs as memory
 
-## What I learned
+The backbone is a set of documents that travel with the repo and stay current: `STATUS`, `DECISIONS` (an ADR log), `ARCHITECTURE`, `DATA_MODEL`, `PLANNING`. `STATUS.md` is read at the start of every session and rewritten at the end, so a cold start finds its context on disk instead of lost to the last conversation.
 
-The interesting part isn't the prompts — it's that most of an agent's mistakes are really *context* mistakes. Give it a structure that forces decisions to be recorded and kept fresh, and a lot of the "AI did something dumb" problems quietly disappear. The discipline lives in the scaffolding, not the model.
+### Commit discipline
+
+Four commit types — `impl:`, `test:`, `fix:`, `docs:` — are never combined. The history stays legible: you can always see where a decision was made versus where it was carried out, and the malleable docs stay in lockstep with the code.
+
+### Also in the box
+
+- A prompt library — three task modes plus a tailored prompt for each RPID track.
+- A GitHub Actions test gate — a required check, so nothing merges on red CI.
+- Solo mode by default; a full team model (roles, branch hierarchy) sits dormant behind a flag.
+- Opt-in profiles for language/framework tooling, so the core stays stack-agnostic.
+
+### What stuck
+
+Most of an agent's mistakes are really *context* mistakes. Force decisions to be recorded and kept fresh, and a lot of "the AI did something dumb" quietly disappears. The discipline lives in the scaffolding, not the model.

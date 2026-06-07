@@ -5,29 +5,30 @@ order: 1
 description: "An agent-based society simulator that runs 100+ LLMs in parallel to observe emergent social behaviors."
 lede: "An agent-based society simulator that runs 100+ LLMs in parallel to observe emergent social behaviors."
 year: 2026
-stack: ["Google Kubernetes Engine", "LangGraph", "WebSockets"]
+stack: ["Google Kubernetes Engine", "Vertex AI Gemini", "Cloud Pub/Sub", "WebSockets"]
 source: "https://github.com/vonkovi/sim42"
+image: "/projects/sim42.png"
+video: "/projects/sim42.mp4"
 ---
 
-SIM42 is a distributed, agent-based simulation built to study how social behavior emerges from many independent minds. Rather than scripting outcomes, it hands each of 100+ language-model agents its own memory, goals, and relationships — then lets them interact freely and watches what forms.
+SIM42 is a distributed, agent-based simulation built to study how economies, hierarchies, and norms emerge from many independent minds. Every one of 100+ language-model agents starts from the *same* immutable objective — "accumulate coins" — and everything interesting downstream (trade, reputation, coalitions) is emergent, not scripted.
 
-## The idea
+### The PIANO loop
 
-Most multi-agent demos top out at a handful of agents sharing one loop. The behavior worth studying — coalitions forming, rumors spreading, norms hardening — only appears at scale. Getting to scale is an engineering problem long before it is a research one, and closing that gap is what SIM42 is really about.
+Agents don't run on a global tick. Each one is split into a non-LLM **Sensor** (interrupt-driven), an **Orchestrator** that only calls the model on a deliberate decision, and **Tools** for actions. The payoff is economic: an idle or sleeping agent costs *zero* compute, so the model is spent only where a real choice happens.
 
-## How it works
+### The day is the clock
 
-A scheduler fans work across the agent pool with **asyncio**, so 100+ model calls advance concurrently instead of blocking one another. Each agent runs a small perceive → reflect → act loop held in LangGraph, while a shared world model resolves everyone's actions into a single consistent state on every tick.
+The in-game day is the fundamental time unit, and sleep is the natural synchronization barrier. Each morning an agent rebuilds a mutable "sense of self" with a single reflection call — which is how identical prompts diverge into distinct strategies over a hundred simulated days.
 
-- Concurrent agent loop that keeps 100+ models busy without head-of-line blocking.
-- Per-agent memory with retrieval, so choices stay grounded in history.
-- A shared world model that serializes conflicting actions deterministically.
-- A live WebSocket feed driving the observability suite.
+### Running it on GKE
 
-## Watching it run
+Three engines — **World**, **God**, **State** — run as separate services on Google Kubernetes Engine, with **one pod per agent** and per-agent `asyncio` loops inside. They coordinate over **Cloud Pub/Sub**; **Firestore** holds agent state; a live **WebSocket** feed drives a Phaser/TypeScript dashboard so you can watch factions form in real time.
 
-The dashboard is half the project. A live graph shows who is talking to whom; message volume, sentiment, and faction membership update as the simulation ticks forward. Emergence is only interesting if you can see it, so making the run legible took as much effort as making it happen.
+### Personality and energy
 
-## What I learned
+Hidden **Big Five** multipliers scale the energy cost of every action, so agents express temperament purely through behavior — never by reading their own scores. Energy depletes with action and recovers only through sleep, which turns "rest" into a real constraint rather than flavor text.
 
-The hard limits were backpressure and cost, not cleverness. Keeping a hundred models busy means treating rate limits and token budgets as first-class parts of the scheduler rather than afterthoughts. The lesson that stuck: at scale, the infrastructure **is** the experiment.
+### What stuck
+
+The hard limit was compute cost, not cleverness. The first cut paid a full LLM call for every agent on every tick — about two minutes per tick — so the entire v2 design is one idea: make idleness free. At this scale, the infrastructure **is** the experiment.

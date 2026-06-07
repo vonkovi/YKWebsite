@@ -2,33 +2,33 @@
 title: "SimpleArm"
 category: "Robotics"
 order: 2
-description: "A six-degree-of-freedom dexterous arm built from scratch — mechanical design, servo-driver electronics, and real-time inverse kinematics."
-lede: "Built from scratch, end to end — the mechanical design, the servo-driver electronics, and the real-time inverse kinematics that make it move."
+description: "A depth-camera-guided robotic arm that turns real-world 3D coordinates into motion — point-cloud perception, coordinate-frame transforms, and real-time inverse kinematics."
+lede: "A robotic arm that sees a point in 3D space and reaches for it — depth-camera perception, camera-to-base coordinate transforms, and real-time inverse kinematics."
 year: 2026
-stack: ["CAD", "Python", "Raspberry Pi", "Arduino", "Altium Designer"]
+stack: ["Python", "Arduino", "Intel RealSense", "OpenCV", "MediaPipe"]
 source: "https://github.com/vonkovi/simplearm"
 image: "/projects/simplearm.png"
 video: "/projects/simplearm.mp4"
 ---
 
-SimpleArm is a six-degree-of-freedom desktop manipulator I designed end to end — the linkage geometry, the board that drives six servos cleanly, and the firmware that turns a target pose into smooth, deliberate motion.
+SimpleArm is a servo arm that sees a point in 3D space and reaches for it. The interesting half isn't the motors — it's the perception-to-motion pipeline that turns a camera frame into joint angles the hardware can execute.
 
-## Mechanical
+### Seeing in 3D
 
-The arm is six revolute joints in a wrist-partitioned layout: three for position, three for orientation. I modeled the linkages in **Fusion 360** around the torque each joint actually has to hold, then iterated on the print until the play at the wrist was small enough to ignore.
+An **Intel RealSense D435** depth camera (640×480 at 30 FPS) supplies the scene; OpenCV and `pyrealsense2` process the frames, and **MediaPipe** tracks a hand or object for the arm to follow. The input is a real depth reading, not a flat image — the arm knows how far away a target is.
 
-## Electronics
+### Camera frame → robot frame
 
-Driving six servos off one rail browns out the moment two of them move together. The custom driver board gives each channel clean, decoupled power and isolates the logic supply from the motor supply, so a heavy move never resets the microcontroller mid-trajectory.
+A calibration step solves the camera-to-base offset, and every target point is pushed through a transformation matrix so "where the camera sees it" becomes "where the arm must reach." Getting these two frames to agree is the part that makes or breaks the whole system.
 
-## Firmware
+### Inverse kinematics
 
-The controller solves **inverse kinematics** every cycle — mapping a desired end-effector pose to six joint angles in closed form — then feeds smoothed setpoints to the servo loop. Smoothing is the difference between motion that looks robotic and motion that looks intentional.
+An **IK solver** maps a target (x, y, z) to servo angles — each joint clamped to its real mechanical range — and streams them to an Arduino over serial. A motor-driven gripper closes on contact using dual limit switches, with a five-second failsafe so a missed grab never stalls the arm.
 
-- Closed-form IK solved on-device every control tick.
-- Custom driver board for clean, decoupled six-channel power.
-- Trajectory smoothing so paths read as continuous, not stepped.
+### Two ways to drive it
 
-## What I learned
+A **PyQt5** GUI exposes both an interactive mode (type a coordinate, the arm goes there) and a tracking mode (auto-follow a detected object), with a socket layer decoupling perception from control.
 
-Most of the time went into things that never show up in a demo video — power integrity, mechanical slop, unglamorous tolerances. The arm only looks simple because the hard parts are hidden, which is rather the point.
+### What stuck
+
+The arm is the easy part. Most of the work was perception and calibration — getting the camera and the arm to agree on where a point actually *is*. Robotics, it turns out, is mostly coordinate frames.

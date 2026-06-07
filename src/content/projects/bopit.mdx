@@ -2,29 +2,33 @@
 title: "BOP-IT"
 category: "Embedded Systems"
 order: 3
-description: "A reaction game on a bare AVR microcontroller, written in C++ against registers and interrupts — doing a lot with very little memory."
-lede: "Written in C++ against an AVR's registers and interrupts — doing a lot with very little memory."
+description: "A wireless reaction game on bare-metal AVR — register-level C++ driving an IMU, an SPI display, and a Bluetooth link between a handheld controller and a separate screen."
+lede: "Register-level C++ across two ATmega328P boards — an IMU, an SPI display, and a Bluetooth link — doing a lot with very little memory."
 year: 2024
-stack: ["C++", "AVR/ATmega", "Arduino"]
+stack: ["C++", "AVR/ATmega328P", "PlatformIO", "I2C · SPI · UART"]
 source: "https://github.com/vonkovi/bop-it"
 image: "/projects/bopit.png"
 video: "/projects/bopit.mp4"
 ---
 
-BOP-IT is the classic call-and-react toy rebuilt on bare metal — no framework, no operating system, just C talking straight to an AVR microcontroller's timers, ports, and interrupt vectors.
+BOP-IT is the classic call-and-react toy rebuilt on bare metal: two **ATmega328P** boards, register-level C++, and no Arduino framework hiding the hardware. A handheld controller calls the actions; a separate display unit keeps score over a wireless link.
 
-## The constraint
+### Bare metal, by hand
 
-Working this close to the chip is the whole point. There is no allocator to lean on and no scheduler to hide behind; every byte of RAM and every clock cycle is something you account for yourself. The game has to fit in a few kilobytes and still feel instant.
+Instead of the Arduino abstractions, the game runs on custom register-level libraries — SPI, USART, timers, I2C — so every port, timer, and interrupt vector is set directly. The whole thing lives in a few kilobytes of RAM, and you account for each one yourself.
 
-## How it works
+### Reading the player
 
-A hardware timer drives the round clock while an **interrupt-driven input loop** samples the controls — so the chip never sits in a busy-wait. As rounds speed up the timing budget shrinks, and an interrupt-first design is what keeps inputs responsive when there is no slack left.
+A **BNO055 IMU** over I2C reads tilt from Euler angles; a tilt-ball switch catches shakes; potentiometers handle twist and volume; buttons cover the rest. Input is interrupt- and timer-driven, so the chip never sits in a busy-wait — which matters as rounds accelerate and the timing budget shrinks.
 
-- Interrupt-driven input — no blocking polls.
-- Hardware timers for precise, accelerating round windows.
-- Entire game state kept in a few kilobytes of RAM.
+### Two units, one game
 
-## What I learned
+The controller and the **ST7735** display (128×160, SPI) are separate boards talking over **Bluetooth (USART)**. Splitting input from display meant solving wireless timing and protocol reliability between two microcontrollers — the unglamorous half of the project.
 
-Constraints are clarifying. With nothing to abstract the hardware away, you understand exactly what the machine is doing on every cycle — and that understanding is worth more than any framework I could have reached for instead.
+### Details that make it feel alive
+
+Six LEDs track the round timer and three lives; a passive buzzer plays the *Cantina Band* theme at 140 BPM while the pace ramps up.
+
+### What stuck
+
+Constraints are clarifying. With custom libraries down to the registers, you know exactly what the machine does on every cycle — and that understanding is worth more than any framework I could have reached for instead.

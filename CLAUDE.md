@@ -29,8 +29,11 @@ src/                  ← Astro source
     writing/[slug].astro  ← Essay detail page — one per blog post (subnav + prose reading column)
   styles/
     global.css        ← Plain CSS design system (custom props, oklch palette). No Tailwind.
+astro.config.mjs      ← Astro config: site = https://yvonkim.com, @astrojs/mdx integration
+.github/workflows/
+  deploy.yml          ← GitHub Pages CI: build + publish on every push to main
 docs/                 ← Older planning docs (version1/) — predate this redesign; treat as historical
-public/               ← Static assets (Yvon-Kim-Resume.pdf, favicon)
+public/               ← Static assets (Yvon-Kim-Resume.pdf, favicon, CNAME for apex domain)
 setup.ps1             ← First-time setup script (PowerShell)
 update.ps1            ← Pull + sync deps + type-check + build (PowerShell)
 ```
@@ -53,6 +56,11 @@ npm run preview        # preview production build locally
 npm run astro          # direct Astro CLI access
 npx astro check        # type-check .astro and .ts files
 ```
+
+### Deployment
+
+The site auto-deploys to **GitHub Pages** on every push to `main` via `.github/workflows/deploy.yml` (uses `withastro/action` to build, then `actions/deploy-pages` to publish — no manual step). Served from the custom apex domain **yvonkim.com**: `astro.config.mjs` sets `site` to the canonical URL (for absolute URLs/sitemap) and `public/CNAME` pins the domain on Pages. Because it's served at the domain root, **no `base` path** is configured — root-absolute asset paths (`/projects/foo.png`) work as-is. Pushing to `main` is publishing; there is no separate staging environment.
+
 ---
 
 ## Architecture Summary

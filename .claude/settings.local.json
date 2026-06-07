@@ -27,7 +27,11 @@
       "Bash(gh auth *)",
       "Bash(gh --version)",
       "PowerShell($gh = Get-Command gh -ErrorAction SilentlyContinue; if \\($gh\\) { \"gh found: $\\($gh.Source\\)\"; gh auth status 2>&1 | Select-Object -First 4 } else { \"gh NOT found\" })",
-      "Bash(echo \"EXIT:$?\")"
+      "Bash(echo \"EXIT:$?\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\kmyn7\\\\Projects\\\\ClaudeRPID\" -Recurse -Depth 2)",
+      "Bash(Select-Object -ExpandProperty FullName)"
     ]
   }
 }

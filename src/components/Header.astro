@@ -1,25 +1,20 @@
 ---
-// Sticky nav: wordmark + tabs (left), social + résumé icons (right).
-// `subnav` variant (detail pages) swaps the tabs for a back-link to the index.
+// Sticky nav: wordmark (left), social + résumé icons (right).
+// `subnav` variant (detail pages) adds a back-link to the index.
 interface Props {
   variant?: 'main' | 'subnav';
   backHref?: string;
   backLabel?: string;
 }
-const { variant = 'main', backHref = '/#writing', backLabel = 'Writing' } = Astro.props;
+const { variant = 'main', backHref = '/', backLabel = 'Work' } = Astro.props;
 const subnav = variant === 'subnav';
 ---
 <header class:list={['nav', subnav && 'subnav']}>
   <nav class="nav-inner">
     <div class="nav-left">
       <a class="brand" href={subnav ? '/' : '#top'}>Yvon&nbsp;Kim</a>
-      {subnav ? (
+      {subnav && (
         <a class="back-link" href={backHref}><span class="arr" aria-hidden="true">←</span> {backLabel}</a>
-      ) : (
-        <>
-          <button class="tab" data-tab="projects" aria-selected="true">Projects</button>
-          <button class="tab" data-tab="writing" aria-selected="false">Writing</button>
-        </>
       )}
     </div>
     <div class="nav-right">
@@ -32,6 +27,9 @@ const subnav = variant === 'subnav';
         </a>
         <a href="https://www.linkedin.com/in/kimyvon" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
           <svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.6 0H2.4A2.4 2.4 0 000 2.4v11.2A2.4 2.4 0 002.4 16h11.2a2.4 2.4 0 002.4-2.4V2.4A2.4 2.4 0 0013.6 0zM4.8 13.3H2.7V6.4h2.1v6.9zM3.7 5.5a1.2 1.2 0 110-2.4 1.2 1.2 0 010 2.4zm9.6 7.8h-2.1V9.9c0-.85-.02-1.95-1.19-1.95-1.19 0-1.37.93-1.37 1.89v3.46H6.6V6.4h2v.94h.03c.28-.53.96-1.09 1.98-1.09 2.12 0 2.51 1.4 2.51 3.21v3.84z"/></svg>
+        </a>
+        <a href="https://x.com/vonkovi_" target="_blank" rel="noopener" aria-label="X (Twitter)" title="X — where I post writing">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/></svg>
         </a>
         <span class="nav-div" aria-hidden="true"></span>
         <a class="resume-link" href="/Yvon-Kim-Resume.pdf" download aria-label="Download résumé (PDF)" title="Résumé (PDF)">

@@ -23,13 +23,4 @@ const projects = defineCollection({
   }),
 });
 
-// Blog — essays rendered inline on the Writing tab. Body renders.
-const blog = defineCollection({
-  loader: glob({ pattern: '**/*.mdx', base: './src/content/blog' }),
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-  }),
-});
-
-export const collections = { projects, blog };
+export const collections = { projects };

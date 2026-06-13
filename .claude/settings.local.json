@@ -31,7 +31,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:github.com)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\kmyn7\\\\Projects\\\\ClaudeRPID\" -Recurse -Depth 2)",
-      "Bash(Select-Object -ExpandProperty FullName)"
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(node -p \"require\\('katex/package.json'\\).version\")"
     ]
   }
 }

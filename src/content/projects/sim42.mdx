@@ -11,6 +11,8 @@ image: "/projects/sim42.png"
 video: "/projects/sim42.mp4"
 ---
 
+SIM42 is a distributed, agent-based simulation built to study how economies, hierarchies, and norms emerge from many independent minds. Every one of 100+ language-model agents starts from the *same* immutable objective — e.g. Darwinism, the natural incentive to pass on survivable genes — and everything interesting downstream (trade, reputation, coalitions) is emergent, not scripted.
+
 <figure>
   <iframe
     src="https://link.excalidraw.com/readonly/ebOEKoSblKYjlxLCOEKQ"
@@ -24,6 +26,7 @@ video: "/projects/sim42.mp4"
   <figcaption>SIM42 system architecture — interactive Excalidraw board.</figcaption>
 </figure>
 
+
 <p class="board-links">
   <strong>Boards:</strong>{" "}
   <a href="https://link.excalidraw.com/l/1Tytvdn4MBi/9bMMs4TgRJg" target="_blank" rel="noopener">Overall</a> ·{" "}
@@ -32,24 +35,64 @@ video: "/projects/sim42.mp4"
   <a href="https://link.excalidraw.com/l/1Tytvdn4MBi/3Y0u2nyi8FA" target="_blank" rel="noopener">GKE architecture</a>
 </p>
 
-SIM42 is a distributed, agent-based simulation built to study how economies, hierarchies, and norms emerge from many independent minds. Every one of 100+ language-model agents starts from the *same* immutable objective — "accumulate coins" — and everything interesting downstream (trade, reputation, coalitions) is emergent, not scripted.
+### The Fundamentals (Philosophy of Action)
 
-### The PIANO loop
+What does it mean to *do* something? Philosopher Ludwig Wittgenstein asks similarly, "what is left over if I subtract the fact that my arm goes up from the fact that I raise my arm?" To truly do something, there must be a mental state directing it. If you blink because dust got in your eye, that is a reaction. If you blink to signal a secret to a friend, that is an action. Therefore, action is a physical behavior caused by a specific combination of a desire (wanting something) and a belief (knowing how to get it). The combination is defined as the Causal Theory of Action championed by philosophers like Donald Davidson.
 
-Agents don't run on a global tick. Each one is split into a non-LLM **Sensor** (interrupt-driven), an **Orchestrator** that only calls the model on a deliberate decision, and **Tools** for actions. The payoff is economic: an idle or sleeping agent costs *zero* compute, so the model is spent only where a real choice happens.
+You can define this using a simple equation:
 
-### The day is the clock
+$$
+x_f := x_i + \Delta x
+$$
 
-The in-game day is the fundamental time unit, and sleep is the natural synchronization barrier. Each morning an agent rebuilds a mutable "sense of self" with a single reflection call — which is how identical prompts diverge into distinct strategies over a hundred simulated days.
+Here $x_i$ represents the agent before any action (the non-raised arm), $\Delta x$ represents the change caused by the action (raising the arm), and $x_f$ represents the final state (the raised arm).
 
-### Running it on GKE
+### What is Emergence in Society?
 
-Three engines — **World**, **God**, **State** — run as separate services on Google Kubernetes Engine, with **one pod per agent** and per-agent `asyncio` loops inside. They coordinate over **Cloud Pub/Sub**; **Firestore** holds agent state; a live **WebSocket** feed drives a Phaser/TypeScript dashboard so you can watch factions form in real time.
+If every musician in an orchestra simply decides to play their own sheet music perfectly, it’s just a collection of *individual actions.* But for a cohesive performance to emerge, they must share a joint commitment to a collective goal. They are acting under the framework of "we are playing this piece together." But this joint commitment must emerge first as individuals interact; their actions begin to form patterns, networks, and communication pathways. Out of these dense interactions, a new social property emerges (like a cultural norm, a currency system, or a political movement). This emergent structure has causal power. Once the social structure emerges, it loops back down to constrain and shape the future choices of the individuals within it.
 
-### Personality and energy
+$$
+\sum x_f := \sum \left( x_i + \Delta x \right)
+$$
 
-Hidden **Big Five** multipliers scale the energy cost of every action, so agents express temperament purely through behavior — never by reading their own scores. Energy depletes with action and recovers only through sleep, which turns "rest" into a real constraint rather than flavor text.
+The summation of these changes shapes society. But how do we define $\Delta x$? The crux of the project is not actually defining the society itself (that part is easy), but how the $\Delta x$ emerges and forms.
 
-### What stuck
+### The Sensor and Orchestrator Loop
 
-The hard limit was compute cost, not cleverness. The first cut paid a full LLM call for every agent on every tick — about two minutes per tick — so the entire v2 design is one idea: make idleness free. At this scale, the infrastructure **is** the experiment.
+This section seeks to answer the following question: "what is an agent?" Agents don't run on a global tick. Each one is split into a non-LLM or lightweight **sensor** (interrupt-driven), an **orchestrator** that only calls the model on a deliberate decision, and **tools** for actions. Here are two examples of how this may show up.
+
+1. Agent made the decision (orchestrator) to drive to work (tool call) because the global time was 9 AM (sensor trigger).
+2. Agent decides (orchestrator) to eat lunch (tool call) because it is starting to get hungry (sensor trigger).
+
+In other words, it follows a pattern where a sensor triggers based on internal or external stimuli, which then triggers the orchestrator to make a logical decision, and then carries out the decision using its tools. It is also important to note that an agent may have countless different sensors and tools for separate purposes. The orchestrator is controlled by an LLM (OpenAI, Claude, or Gemini).
+
+### Simulating Agent interactions
+
+Agents are not isolated; they are encouraged to interact with other agents. The project introduces *servers* which are spaces where agents coalesce and speak to one another. Servers act similarly to Discord servers, but much more as an abstraction. They can host anything from one-on-one text channels to global social media feeds. Ultimately, a server is an in-between communication network between agents. Within these servers, social norms like culture and religion can form.
+
+What may be interesting is that consuming these feeds applies a delta to individual agents. As the agent orchestrator reads through, its own beliefs may alter in accordance with its overall goal and purpose.
+
+### Solving the Compute Problem Using GKE [Google Kubernetes Engine]
+
+This section seeks to answer the following question: "isn't all of this computationally expensive?" Yes, it is.
+
+This program cannot run on my local computer; it must rely on external data centers like AWS or Google Cloud. I have chosen Google Cloud due to its more mature LLM integration, unlike AWS. It's about to get technical, but if you want to understand GKE, you probably will need to watch a couple of tutorials on this. I'm not stopping to help you out here.
+
+<figure>
+  <img src="/projects/sim42_gke.png" alt="SIM42 GKE architecture — World, God, and State services with one pod per agent, coordinating over Cloud Pub/Sub" />
+  <figcaption>GKE architecture — World / God / State services, one pod per agent, coordinating over Cloud Pub/Sub.</figcaption>
+</figure>
+
+The GKE structure is separated into three services — **world**, **god**, **state** — each running alongside its own respective topic for pub/sub. Additionally, it is set up so there is *one pod per agent* with per-agent `asyncio` loops inside. They coordinate over *Cloud Pub/Sub*; *Firestore* holds agent state; a live *WebSocket* feed drives an HTML dashboard so you can watch factions form in real time. All actions are defined in the GKE diagram above.  
+
+### The Dashboard
+
+<figure>
+  <img src="/projects/sim42_ui.png" alt="SIM42 dashboard — original hand-drawn sketch" />
+  <figcaption>The original sketch.</figcaption>
+</figure>
+
+<figure>
+  <img src="/projects/sim42_ui_modern.png" alt="SIM42 dashboard — the built, modern interface" />
+  <figcaption>The new dashboard.</figcaption>
+</figure>

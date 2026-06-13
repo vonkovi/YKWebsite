@@ -448,6 +448,15 @@ html.js .proj.in { opacity: 1; transform: none; }
 .prose ul { margin: 0 0 18px; padding-left: 1.1em; color: var(--ink-soft); }
 .prose li { margin-bottom: 8px; line-height: 1.6; }
 
+/* KaTeX math — inherit ink color; let display equations scroll on narrow screens */
+.prose .katex { color: var(--ink); }
+.prose .katex-display {
+  margin: clamp(22px, 3vw, 30px) 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 2px;
+}
+
 /* inline media — Markdown `![alt](/path)` and HTML <img>/<video>/<figure> in the body */
 .prose img,
 .prose video {
